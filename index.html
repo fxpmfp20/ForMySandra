@@ -9,9 +9,10 @@
 
   <style>
     :root {
-      --bg: #0f0f14;
+      /* Pink gradient background */
+      --bg: linear-gradient(135deg, #ff9a9e, #fad0c4);
       --accent: #ff6b9e;
-      --text: #ffffff;
+      --text: #2c2c2c;
     }
 
     * {
@@ -21,7 +22,7 @@
     }
 
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: Arial, sans-serif;
     }
@@ -47,15 +48,16 @@
       padding: 4rem 1rem;
     }
 
+    /* Typewriter */
     .typewriter {
       font-family: 'Dancing Script', cursive;
       font-size: 3rem;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 2px solid rgba(255,255,255,0.6);
+      border-right: 2px solid rgba(0,0,0,0.6);
       width: 0;
       animation: typing 3s steps(22, end) forwards,
-                 blink 0.7s step-end infinite;
+                 blink 0.7s step-end 3s forwards; /* stops after typing */
       display: inline-block;
     }
 
@@ -65,7 +67,8 @@
     }
 
     @keyframes blink {
-      50% { border-color: transparent; }
+      0%, 100% { border-color: transparent; }
+      50% { border-color: rgba(0,0,0,0.6); }
     }
 
     .subtitle {
@@ -81,6 +84,7 @@
       to { opacity: 1; }
     }
 
+    /* Timeline */
     .timeline-section {
       display: none;
       overflow-x: auto;
@@ -95,7 +99,7 @@
 
     .month {
       display: inline-block;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.4);
       border-radius: 10px;
       padding: 1rem;
       min-width: 200px;
@@ -141,38 +145,27 @@
   <!-- TIMELINE -->
   <section class="timeline-section" id="timelineSection">
     <div class="timeline-container">
-      <!-- Example months -->
-      <div class="month">
-        <div class="dot"></div>
-        <h3>July 2025</h3>
-        <p>Our first adventure together.</p>
-      </div>
-      <div class="month">
-        <div class="dot"></div>
-        <h3>August 2025</h3>
-        <p>Memorable day at the beach.</p>
-      </div>
-      <div class="month">
-        <div class="dot"></div>
-        <h3>September 2025</h3>
-        <p>Funny moments in the city.</p>
-      </div>
-      <!-- Add more months as needed -->
+      <!-- Full months July 2025 - February 2026 -->
+      <div class="month"><div class="dot"></div><h3>July 2025</h3><p>Start of our journey.</p></div>
+      <div class="month"><div class="dot"></div><h3>August 2025</h3><p>Beach memories.</p></div>
+      <div class="month"><div class="dot"></div><h3>September 2025</h3><p>City adventures.</p></div>
+      <div class="month"><div class="dot"></div><h3>October 2025</h3><p>Cozy autumn days.</p></div>
+      <div class="month"><div class="dot"></div><h3>November 2025</h3><p>First small trip together.</p></div>
+      <div class="month"><div class="dot"></div><h3>December 2025</h3><p>Holiday celebrations.</p></div>
+      <div class="month"><div class="dot"></div><h3>January 2026</h3><p>New year, new adventures.</p></div>
+      <div class="month"><div class="dot"></div><h3>February 2026</h3><p>Special February memories.</p></div>
     </div>
   </section>
 
-  <!-- JS -->
   <script>
     const button = document.getElementById('seeHighlights');
     const timeline = document.getElementById('timelineSection');
 
-    // Hide timeline by default
     timeline.style.display = 'none';
 
     button.addEventListener('click', () => {
       timeline.style.display = 'flex';
 
-      // Animate each month
       document.querySelectorAll('.month').forEach((m, i) => {
         setTimeout(() => m.classList.add('visible'), i * 300);
       });
