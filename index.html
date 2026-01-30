@@ -9,7 +9,6 @@
 
   <style>
     :root {
-      /* Pink to purple gradient background */
       --bg: linear-gradient(135deg, #ff9a9e, #8e2de2);
       --accent: #ff6b9e;
       --text: #ffffff;
@@ -48,33 +47,32 @@
       padding: 4rem 1rem;
     }
 
-    /* Typewriter with disappearing cursor */
+    /* Typewriter effect */
     .typewriter {
       font-family: 'Dancing Script', cursive;
       font-size: 3rem;
-      display: inline-block;
-      overflow: hidden;
-      position: relative;
       white-space: nowrap;
-      border-right: 2px solid transparent; /* placeholder to prevent shift */
+      overflow: hidden;
+      display: inline-block;
+      border-right: none; /* cursor is separate pseudo-element */
+      position: relative;
+      width: 0;
       animation: typing 3s steps(22, end) forwards;
     }
 
-    /* Cursor as pseudo-element */
     .typewriter::after {
-      content: "";
+      content: '';
       position: absolute;
-      right: 0;
       top: 0;
+      right: 0;
       width: 2px;
       height: 100%;
-      background-color: rgba(255,255,255,0.9);
+      background-color: var(--text);
       animation: blink 0.7s step-end infinite;
     }
 
-    /* Hide cursor at end of typing */
     .typewriter.done::after {
-      display: none;
+      display: none; /* hide cursor after typing finishes */
     }
 
     @keyframes typing {
@@ -83,7 +81,7 @@
     }
 
     @keyframes blink {
-      0%, 100% { opacity: 0; }
+      0%,100% { opacity: 0; }
       50% { opacity: 1; }
     }
 
@@ -122,6 +120,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
+      cursor: pointer;
     }
 
     .month.visible {
@@ -149,18 +148,17 @@
 </head>
 
 <body>
-  <!-- HERO -->
+  <!-- Hero Section -->
   <section class="hero">
     <h1 class="typewriter" id="greeting">Happy Birthday Alex!</h1>
-    <div class="subtitle">
-      Welcome to a world that we built together, and our journey together
-    </div>
+    <div class="subtitle">Welcome to a world that we built together, and our journey together</div>
     <button id="seeHighlights">See Highlights</button>
   </section>
 
-  <!-- TIMELINE -->
+  <!-- Timeline Section -->
   <section class="timeline-section" id="timelineSection">
     <div class="timeline-container">
+      <!-- Full months July 2025 - February 2026 -->
       <div class="month"><div class="dot"></div><h3>July 2025</h3><p>Start of our journey.</p></div>
       <div class="month"><div class="dot"></div><h3>August 2025</h3><p>Beach memories.</p></div>
       <div class="month"><div class="dot"></div><h3>September 2025</h3><p>City adventures.</p></div>
@@ -173,10 +171,10 @@
   </section>
 
   <script>
-    // Typewriter cursor hide
+    // Hide typewriter cursor after typing
     const greeting = document.getElementById('greeting');
     greeting.addEventListener('animationend', () => {
-      greeting.classList.add('done'); // hides cursor after typing
+      greeting.classList.add('done');
     });
 
     // Timeline button
