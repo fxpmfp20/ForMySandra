@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <title>ForMyXandra</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -115,13 +116,33 @@
       font-size: 0.95rem;
       opacity: 0.9;
     }
+
+    .typewriter {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgba(0,0,0,0.6);
+  width: 0;
+  animation: typing 3s steps(22, end) forwards,
+             blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
   </style>
 </head>
 <body>
 
   <!-- HERO -->
   <div class="container">
-    <h1>Happy Birthday Alex!</h1>
+    <h1 class="typewriter">Happy Birthday Alex!</h1>
     <div class="subtitle">
       Welcome to a world that we built together, and our journey together
     </div>
