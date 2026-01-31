@@ -129,6 +129,15 @@
     blink 0.7s step-end 5;
 }
 
+    .memory {
+  max-width: 100%;    /* fits container width */
+  height: auto;       /* keeps aspect ratio */
+  border-radius: 12px; /* optional: nice rounded corners */
+  display: block;
+  margin: 10px auto;   /* centers and spaces them */
+}
+
+
 @keyframes typing {
   from { width: 0 }
   to { width: 45%;
@@ -138,6 +147,48 @@
 
 @keyframes blink {
   50% { border-color: transparent }
+}
+
+    #back-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #ff66cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#back-button:hover {
+  background: #ff33aa;
+}
+    #timeline {
+  overflow-x: auto;      /* horizontal scrolling */
+  white-space: nowrap;   /* keep month cards in one row */
+  padding: 20px 0;
+}
+
+.month-card {
+  display: inline-block;
+  width: 150px;
+  margin: 0 10px;
+  vertical-align: top;
+}
+
+    .typewriter {
+  font-size: 3rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .typewriter {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
 }
   </style>
 </head>
@@ -199,6 +250,10 @@
       <div id="gallery">
       </div>
 
+      <div id="gallery-container">
+  <button id="back-button">Back to Highlights</button>
+  <div id="gallery"></div>
+
     </div>
   </section>
 
@@ -235,6 +290,11 @@
 
       gallery.scrollIntoView({ behavior: "smooth" });
     });
+
+    document.getElementById("back-button").addEventListener("click", () => {
+  document.getElementById("gallery").innerHTML = "";
+  document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
+});
   });
   </script>
 
