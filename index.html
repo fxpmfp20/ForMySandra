@@ -157,42 +157,42 @@
     <div class="timeline-wrapper">
 
       <div class="month-card">
-        <div class="month-title">July 2025</div>
+        <div class="month-title" data-month="july">July 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
       <div class="month-card">
-        <div class="month-title">August 2025</div>
+        <div class="month-title" data-month="august">August 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
       <div class="month-card">
-        <div class="month-title">September 2025</div>
+        <div class="month-title" data-month="september">September 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
       <div class="month-card">
-        <div class="month-title">October 2025</div>
+        <div class="month-title" data-month="october">October 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
       <div class="month-card">
-        <div class="month-title">November 2025</div>
+        <div class="month-title" data-month="november">November 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
       <div class="month-card">
-        <div class="month-title">December 2025</div>
+        <div class="month-title" data-month="december">December 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
       <div class="month-card">
-        <div class="month-title">January 2026</div>
+        <div class="month-title" data-month="january">January 2026</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
       <div class="month-card">
-        <div class="month-title">February 2026</div>
+        <div class="month-title" data-month="february">February 2026</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
@@ -204,6 +204,34 @@
       document.getElementById("timeline").style.display = "block";
       document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
     }
+     const gallery = document.getElementById("gallery");
+
+  const memories = {
+    july: ["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg", "july/image.jpg"],
+    august: ["augusr/IMG_20250801_202844.jpg", "augusr/IMG_20250801_202937.jpg", "augusr/IMG_20250809_162003.jpg", "augusr/IMG_20250809_162004.jpg", "augusr/IMG_20250811_175856.jpg",
+            "augusr/IMG_20250829_212757.jpg", "augusr/IMG_20250829_212811.jpg", "augusr/Picsart_25-08-11_17-14-32-326.jpg", "augusr/Screenshot_2025-08-01-20-39-14-866_com.discord.jpg", 
+            "augusr/Screenshot_2025-08-13-17-30-19-063_com.discord.jpg", "augusr/Screenshot_2025-08-13-17-30-25-788_com.discord.jpg", "augusr/Screenshot_2025-08-16-21-34-37-244_com.discord.jpg"],
+    september: ["sept/IMG_20250911_163403.jpg"],
+    january: ["jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"]
+  };
+
+  document.querySelectorAll(".month-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const month = card.dataset.month;
+      gallery.innerHTML = "";
+
+      if (!memories[month]) return;
+
+      memories[month].forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "memory";
+        gallery.appendChild(img);
+      });
+
+      gallery.scrollIntoView({ behavior: "smooth" });
+    });
+  });
   </script>
 
 </body>
