@@ -1,195 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>ForMyXandra</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    :root {
-      --bg: linear-gradient(135deg, #ff9a9e, #8e2de2);
-      --accent: #ff6b9e;
-      --text: #ffffff;
-    }
-
+    /* RESET */
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #ff9acb, #b36bff);
+      background-size: 300% 300%;
+      animation: gradientMove 10s ease infinite;
+      color: white;
+      overflow-x: hidden;
     }
 
-    button {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      background-color: var(--accent);
-      color: #fff;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: transform 0.2s;
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    .hero {
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
       text-align: center;
-      padding: 4rem 1rem;
     }
 
-    /* Typewriter effect */
-    .typewriter {
-      font-family: 'Dancing Script', cursive;
+    h1 {
       font-size: 3rem;
-      white-space: nowrap;
-      overflow: hidden;
-      display: inline-block;
-      border-right: none; /* cursor is separate pseudo-element */
-      position: relative;
-      width: 0;
-      animation: typing 3s steps(22, end) forwards;
-    }
-
-    .typewriter::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 2px;
-      height: 100%;
-      background-color: var(--text);
-      animation: blink 0.7s step-end infinite;
-    }
-
-    .typewriter.done::after {
-      display: none; /* hide cursor after typing finishes */
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      0%,100% { opacity: 0; }
-      50% { opacity: 1; }
+      margin-bottom: 1rem;
     }
 
     .subtitle {
+      max-width: 600px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 30px;
       font-size: 1rem;
-      margin-top: 1rem;
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards;
-      animation-delay: 3.2s;
+      cursor: pointer;
+      background: white;
+      color: #b36bff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
-    /* Timeline */
+    /* TIMELINE SECTION */
     .timeline-section {
       display: none;
-      overflow-x: auto;
-      padding: 2rem;
-      white-space: nowrap;
+      width: 100%;
+      padding: 3rem 1rem;
     }
 
-    .timeline-container {
+    .timeline-wrapper {
       display: flex;
       gap: 2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scroll-behavior: smooth;
     }
 
-    .month {
-      display: inline-block;
-      background: rgba(255,255,255,0.3);
+    .timeline-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .timeline-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.4);
       border-radius: 10px;
-      padding: 1rem;
-      min-width: 200px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      cursor: pointer;
     }
 
-    .month.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .month-card {
+      min-width: 260px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: left;
+      transition: transform 0.3s ease;
     }
 
-    .month .dot {
-      width: 12px;
-      height: 12px;
-      background-color: var(--accent);
-      border-radius: 50%;
+    .month-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .month-title {
+      font-size: 1.3rem;
       margin-bottom: 0.5rem;
+      font-weight: bold;
     }
 
-    .month h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .month p {
-      font-size: 0.9rem;
+    .month-caption {
+      font-size: 0.95rem;
+      opacity: 0.9;
     }
   </style>
 </head>
-
 <body>
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1 class="typewriter" id="greeting">Happy Birthday Alex!</h1>
-    <div class="subtitle">Welcome to a world that we built together, and our journey together</div>
-    <button id="seeHighlights">See Highlights</button>
-  </section>
 
-  <!-- Timeline Section -->
-  <section class="timeline-section" id="timelineSection">
-    <div class="timeline-container">
-      <!-- Full months July 2025 - February 2026 -->
-      <div class="month"><div class="dot"></div><h3>July 2025</h3><p>Start of our journey.</p></div>
-      <div class="month"><div class="dot"></div><h3>August 2025</h3><p>Beach memories.</p></div>
-      <div class="month"><div class="dot"></div><h3>September 2025</h3><p>City adventures.</p></div>
-      <div class="month"><div class="dot"></div><h3>October 2025</h3><p>Cozy autumn days.</p></div>
-      <div class="month"><div class="dot"></div><h3>November 2025</h3><p>First small trip together.</p></div>
-      <div class="month"><div class="dot"></div><h3>December 2025</h3><p>Holiday celebrations.</p></div>
-      <div class="month"><div class="dot"></div><h3>January 2026</h3><p>New year, new adventures.</p></div>
-      <div class="month"><div class="dot"></div><h3>February 2026</h3><p>Special February memories.</p></div>
+  <!-- HERO -->
+  <div class="container">
+    <h1>Happy Birthday Alex!</h1>
+    <div class="subtitle">
+      Welcome to a world that we built together, and our journey together
+    </div>
+    <button onclick="showTimeline()">See Highlights</button>
+  </div>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section" id="timeline">
+    <div class="timeline-wrapper">
+
+      <div class="month-card">
+        <div class="month-title">July 2025</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="month-title">August 2025</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="month-title">September 2025</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="month-title">October 2025</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="month-title">November 2025</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="month-title">December 2025</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="month-title">January 2026</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="month-title">February 2026</div>
+        <div class="month-caption">Add your memory here.</div>
+      </div>
+
     </div>
   </section>
 
   <script>
-    // Hide typewriter cursor after typing
-    const greeting = document.getElementById('greeting');
-    greeting.addEventListener('animationend', () => {
-      greeting.classList.add('done');
-    });
-
-    // Timeline button
-    const button = document.getElementById('seeHighlights');
-    const timeline = document.getElementById('timelineSection');
-
-    timeline.style.display = 'none';
-
-    button.addEventListener('click', () => {
-      timeline.style.display = 'flex';
-      document.querySelectorAll('.month').forEach((m, i) => {
-        setTimeout(() => m.classList.add('visible'), i * 300);
-      });
-      timeline.scrollTo({ left: 0, behavior: 'smooth' });
-    });
+    function showTimeline() {
+      document.getElementById("timeline").style.display = "block";
+      document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
+    }
   </script>
+
 </body>
 </html>
