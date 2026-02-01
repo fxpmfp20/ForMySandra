@@ -163,19 +163,9 @@
   border-radius: 8px;
   cursor: pointer;
 }
-
-    #back-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background: #ff66cc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  z-index: 10; /* ensures it stays on top */
+#back-button:hover {
+  background: #ff33aa;
 }
-    
     #timeline {
   overflow-x: auto;      /* horizontal scrolling */
   white-space: nowrap;   /* keep month cards in one row */
@@ -184,27 +174,16 @@
 
     #gallery {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  max-width: 100%;
-  padding: 1rem;
 }
 
 #gallery img {
-  max-width: 300px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  max-width: 90%;
+  max-height: 70vh;
+  object-fit: contain;
   border-radius: 12px;
-}
-
-    #gallery-container {
-  display: none;       /* hidden by default */
-  padding: 2rem;
-  overflow-y: auto;    /* vertical scroll if needed */
-  width: 100%;
-  text-align: center;
 }
     
 .month-card {
@@ -298,79 +277,45 @@
   <div id="gallery"></div>
    </div>
      
- <script>
-/* ========= 1. DATA (memories) ========= */
-const memories = {
-  july: [
-    "july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg",
-    "july/image.jpg"
-  ],
-  august: [
-    "augusr/IMG_20250801_202844.jpg",
-    "augusr/IMG_20250801_202937.jpg"
-  ],
-  september: [
-    "sept/IMG_20250911_163403.jpg"
-  ],
-  january: [
-    "jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"
-  ]
-};
-
-/* ========= 2. DOM REFERENCES ========= */
-const timeline = document.getElementById("timeline");
-const galleryContainer = document.getElementById("gallery-container");
-const gallery = document.getElementById("gallery");
-const backButton = document.getElementById("back-button");
-
-/* ========= 3. SHOW TIMELINE ========= */
-function showTimeline() {
-  timeline.style.display = "block";
-  galleryContainer.classList.add("hidden"); // hide gallery
-  timeline.scrollIntoView({ behavior: "smooth" });
-}
-
-/* ========= 4. MONTH CLICK HANDLER ========= */
-document.querySelectorAll(".month-card").forEach(card => {
+  <script>
+    function showTimeline() {
+     document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
-    gallery.innerHTML = ""; // clear previous images
+    gallery.innerHTML = "";
 
     if (!memories[month]) return;
 
-    // ======= BOOK-LIKE ANIMATION =======
-    memories[month].forEach((src, index) => {
+    memories[month].forEach(src => {
       const img = document.createElement("img");
       img.src = src;
       img.className = "memory";
-
-      // initial state for animation
-      img.style.opacity = 0;
-      img.style.transform = "translateY(20px)";
       gallery.appendChild(img);
-
-      // staggered fade-in
-      setTimeout(() => {
-        img.style.transition = "all 0.5s ease";
-        img.style.opacity = 1;
-        img.style.transform = "translateY(0)";
-      }, index * 150); // 150ms delay per image
     });
-    // ====================================
 
-    timeline.style.display = "none";
-    galleryContainer.classList.remove("hidden");
+    document.getElementById("timeline").style.display = "none";
+    document.getElementById("gallery-container").classList.remove("hidden");
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 
-/* ========= 5. BACK BUTTON ========= */
-backButton.addEventListener("click", () => {
+document.getElementById("back-button").addEventListener("click", () => {
   gallery.innerHTML = "";
-  galleryContainer.classList.add("hidden");
-  timeline.style.display = "block";
-  timeline.scrollIntoView({ behavior: "smooth" });
-</script>
-  
+  document.getElementById("gallery-container").classList.add("hidden");
+  document.getElementById("timeline").style.display = "block";
+  document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
+});
+
+  const memories = {
+    july: ["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg", "july/image.jpg"],
+    august: ["augusr/IMG_20250801_202844.jpg", "augusr/IMG_20250801_202937.jpg", "augusr/IMG_20250809_162003.jpg", "augusr/IMG_20250809_162004.jpg", "augusr/IMG_20250811_175856.jpg",
+            "augusr/IMG_20250829_212757.jpg", "augusr/IMG_20250829_212811.jpg", "augusr/Picsart_25-08-11_17-14-32-326.jpg", "augusr/Screenshot_2025-08-01-20-39-14-866_com.discord.jpg", 
+            "augusr/Screenshot_2025-08-13-17-30-19-063_com.discord.jpg", "augusr/Screenshot_2025-08-13-17-30-25-788_com.discord.jpg", "augusr/Screenshot_2025-08-16-21-34-37-244_com.discord.jpg"],
+    september: ["sept/IMG_20250911_163403.jpg"],
+    january: ["jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"]
+  };
+  });
+  </script>
+
 </body>
 </html>
