@@ -160,13 +160,31 @@
      .typewriter {
       font-family: 'Dancing Script', cursive;
       font-size: 3rem;
-      white-space: normal;
+      white-space: nowrap;
       overflow: hidden;
       text-align: center;
       border-right: 2px solid rgba(0,0,0,0.6);
       animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 5;
     }
 
+    /*book flip effect*/
+    .section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  transition: all 0.7s ease;  /* smooth "book flip" */
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(50px);  /* slide down */
+  pointer-events: none;         /* cannot click hidden section */
+}
+
+    /*==========END===========*/
+    
     @keyframes typing {
       from { width: 0; }
       to { width: 100%; border-right-color: transparent; }
@@ -187,7 +205,7 @@
 <body>
 
   <!-- HERO -->
-  <div class="container">
+  <div id="hero" class="container section">
     <h1 class="typewriter">Happy Birthday, my love!</h1>
     <div class="subtitle">
       I've made this website for your special day. I hope you like it, hehe. I love you!&lt;33
@@ -196,7 +214,7 @@
   </div>
 
   <!-- TIMELINE -->
-  <section class="timeline-section" id="timeline">
+  <section id="timeline" class="timeline-section section hidden">
     <div class="timeline-wrapper">
 
       <div class="month-card" data-month="july">
@@ -247,6 +265,24 @@
     </div>
   
   <script>
+    /* ===== Section transition helper ===== */
+  function showSection(from, to) {
+    const fromEl = document.getElementById(from);
+    const toEl = document.getElementById(to);
+
+    fromEl.classList.add('hidden');
+    setTimeout(() => {
+      toEl.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  }
+
+  /* ===== Hero → Timeline ===== */
+  function showTimeline() {
+    showSection('hero', 'timeline');
+  }
+
+  // your month click and back button code here...
     const memories = {
       july:["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg","july/image.jpg"],
       august:["augusr/IMG_20250801_202844.jpg","augusr/IMG_20250801_202937.jpg"],
