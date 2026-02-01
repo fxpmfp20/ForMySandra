@@ -4,8 +4,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <title>ForMyXandra</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* RESET */
     * {
@@ -168,6 +167,20 @@
   padding: 20px 0;
 }
 
+    #gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+#gallery img {
+  max-width: 90%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+    
 .month-card {
   display: inline-block;
   width: 150px;
@@ -189,6 +202,10 @@
   .subtitle {
     font-size: 1rem;
   }
+
+  .hidden {
+    display: none;
+    }
 }
   </style>
 </head>
@@ -247,10 +264,7 @@
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div id="gallery">
-      </div>
-
-      <div id="gallery-container">
+      <div id="gallery-container" class="hidden">
   <button id="back-button">Back to Highlights</button>
   <div id="gallery"></div>
 
