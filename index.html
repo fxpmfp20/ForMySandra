@@ -263,11 +263,6 @@
   
   <script>
     /*EDIT2*/
-    const hero = document.querySelector(".container");
-  const timeline = document.getElementById("timeline");
-  const galleryContainer = document.getElementById("gallery-container");
-  const gallery = document.getElementById("gallery");
-  const backButton = document.getElementById("back-button");
 /*END EDIT2*/
     
   // your month click and back button code here...
@@ -292,49 +287,47 @@
     }
 
     /* ===== MONTH CLICK HANDLER (EDITED) ===== */ 
-    document.querySelectorAll(".month-card").forEach(card=>{
-    card.addEventListener("click",()=>{
-      const month = card.dataset.month;
-      if(!memories[month]) return;
+  document.querySelectorAll(".month-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const month = card.dataset.month;
+    gallery.innerHTML = ""; // clear previous images
+    if (!memories[month]) return;
 
-      gallery.innerHTML = ""; // clear previous
+    // Animate hero/timeline out
+    document.querySelector(".container").classList.add("hidden");
+    timeline.classList.add("hidden");
 
-      // fade out timeline
-      fadeOut(timeline);
+    setTimeout(() => {
+      // add images with book-like fade-in
+      memories[month].forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "memory";
+        img.style.opacity = 0;
+        img.style.transform = "translateY(20px)";
+        gallery.appendChild(img);
 
-      setTimeout(()=>{
-        // add images
-        memories[month].forEach((src,index)=>{
-          const img = document.createElement("img");
-          img.src = src;
-          img.className = "memory";
-          img.style.opacity = 0;
-          img.style.transform = "translateY(20px)";
-          gallery.appendChild(img);
+        setTimeout(() => {
+          img.style.transition = "all 0.5s ease";
+          img.style.opacity = 1;
+          img.style.transform = "translateY(0)";
+        }, index * 150);
+      });
 
-          setTimeout(()=>{
-            img.style.transition = "all 0.5s ease";
-            img.style.opacity = 1;
-            img.style.transform = "translateY(0)";
-          }, index*150);
-        });
-
-        fadeIn(galleryContainer);
-      },500);
-    });
+      galleryContainer.classList.remove("hidden");
+    }, 500); // matches the fade-out duration
   });
+});
 
-  /* ===== BACK BUTTON ===== */
-  backButton.addEventListener("click",()=>{
-    // fade out gallery
-    fadeOut(galleryContainer);
+    backButton.addEventListener("click", () => {
+  gallery.innerHTML = "";
+  galleryContainer.classList.add("hidden");
 
-    setTimeout(()=>{
-      gallery.innerHTML = "";
-      fadeIn(timeline);
-      fadeIn(hero);
-    },500);
-  });
+  // fade timeline and hero back in
+  document.querySelector(".container").classList.remove("hidden");
+  timeline.classList.remove("hidden");
+});
+
     /*END HANDLER WITH BUTTON*/
   </script>
 
