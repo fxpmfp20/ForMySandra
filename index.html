@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>ForMyXandra</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
   <style>
     /* RESET */
@@ -67,6 +68,18 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
+    #back-button {
+      display: block;
+      margin: 20px auto;
+      background: #ff66cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10;
+      
+    }
+
     /* TIMELINE SECTION */
     .timeline-section {
       display: none;
@@ -115,15 +128,69 @@
       font-size: 0.95rem;
       opacity: 0.9;
     }
+    
+/*gallery*/
+    
+    #gallery-container {
+      display: none; /* hidden initially */
+      padding: 2rem;
+      overflow-y: auto;
+      width: 100%;
+      text-align: center;
+    }
+
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 100%;
+    }
+
+    #gallery img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /*typewriting effect*/
+
+     .typewriter {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      white-space: normal;
+      overflow: hidden;
+      text-align: center;
+      border-right: 2px solid rgba(0,0,0,0.6);
+      animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 5;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; border-right-color: transparent; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* ================== MOBILE ================== */
+    @media (max-width: 600px) {
+      .typewriter { font-size: 2rem; }
+      .subtitle { font-size: 1rem; }
+    }
+
   </style>
 </head>
 <body>
 
   <!-- HERO -->
   <div class="container">
-    <h1>Happy Birthday Alex!</h1>
+    <h1>Happy Birthday, my love!</h1>
     <div class="subtitle">
-      Welcome to a world that we built together, and our journey together
+      I've made this website for your special day. I hope you like it, hehe. I love you!<33
     </div>
     <button onclick="showTimeline()">See Highlights</button>
   </div>
@@ -132,54 +199,106 @@
   <section class="timeline-section" id="timeline">
     <div class="timeline-wrapper">
 
-      <div class="month-card">
+      <div class="month-card" data-month="july">
         <div class="month-title">July 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div class="month-card">
+      <div class="month-card" data-month="august">
         <div class="month-title">August 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div class="month-card">
+      <div class="month-card" data-month="september">
         <div class="month-title">September 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div class="month-card">
+      <div class="month-card" data-month="october">
         <div class="month-title">October 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div class="month-card">
+      <div class="month-card" data-month="november">
         <div class="month-title">November 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div class="month-card">
+      <div class="month-card" data-month="december">
         <div class="month-title">December 2025</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div class="month-card">
+      <div class="month-card" data-month="january">
         <div class="month-title">January 2026</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
 
-      <div class="month-card">
+      <div class="month-card" data-month="february">
         <div class="month-title">February 2026</div>
         <div class="month-caption">Add your memory here.</div>
       </div>
-
     </div>
   </section>
-
+  
   <script>
+    const memories = {
+      july:["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg","july/image.jpg"],
+      august:["augusr/IMG_20250801_202844.jpg","augusr/IMG_20250801_202937.jpg"],
+      september:["sept/IMG_20250911_163403.jpg"],
+      january:["jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"]
+    };
+
+    /* ===== DOM REFERENCES ===== */
+    const timeline = document.getElementById("timeline");
+    const galleryContainer = document.getElementById("gallery-container");
+    const gallery = document.getElementById("gallery");
+    const backButton = document.getElementById("back-button");
+
+    /* ===== SHOW TIMELINE ===== */
     function showTimeline() {
-      document.getElementById("timeline").style.display = "block";
-      document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
+      timeline.style.display = "block";
+      galleryContainer.style.display = "none";
+      timeline.scrollIntoView({behavior:"smooth"});
     }
+
+    /* ===== MONTH CLICK HANDLER ===== */
+    document.querySelectorAll(".month-card").forEach(card=>{
+      card.addEventListener("click",()=>{
+        const month = card.dataset.month;
+        gallery.innerHTML=""; // clear previous images
+
+        if(!memories[month]) return;
+
+        // ===== BOOK-LIKE ANIMATION =====
+        memories[month].forEach((src,index)=>{
+          const img=document.createElement("img");
+          img.src=src;
+          img.className="memory";
+          img.style.opacity=0;
+          img.style.transform="translateY(20px)";
+          gallery.appendChild(img);
+
+          setTimeout(()=>{
+            img.style.transition="all 0.5s ease";
+            img.style.opacity=1;
+            img.style.transform="translateY(0)";
+          },index*150);
+        });
+
+        timeline.style.display="none";
+        galleryContainer.style.display="block";
+        window.scrollTo({top:0,behavior:"smooth"});
+      });
+    });
+
+    /* ===== BACK BUTTON ===== */
+    backButton.addEventListener("click",()=>{
+      gallery.innerHTML="";
+      galleryContainer.style.display="none";
+      timeline.style.display="block";
+      timeline.scrollIntoView({behavior:"smooth"});
+    });
   </script>
 
 </body>
