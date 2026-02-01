@@ -253,14 +253,23 @@
         <div class="month-caption">Add your memory here.</div>
       </div>
   </section>
-   <!-- GALLERY -->
-<div id="gallery-container">
+   <!-- GALLERY (EDIT2) -->
+<div id="gallery-container" class="section"
+  style="opacity:0; pointer-events: none;">
   <button id="back-button">← Back to Timeline</button>
   <div id="gallery"></div>
 </div>
     </div>
   
   <script>
+    /*EDIT2*/
+    const hero = document.querySelector(".container");
+  const timeline = document.getElementById("timeline");
+  const galleryContainer = document.getElementById("gallery-container");
+  const gallery = document.getElementById("gallery");
+  const backButton = document.getElementById("back-button");
+/*END EDIT2*/
+    
   // your month click and back button code here...
     const memories = {
       july:["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg","july/image.jpg"],
@@ -283,46 +292,49 @@
     }
 
     /* ===== MONTH CLICK HANDLER (EDITED) ===== */ 
-    document.querySelectorAll(".month-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const month = card.dataset.month;
-    gallery.innerHTML = ""; // clear previous images
-    if (!memories[month]) return;
+    document.querySelectorAll(".month-card").forEach(card=>{
+    card.addEventListener("click",()=>{
+      const month = card.dataset.month;
+      if(!memories[month]) return;
 
-    // Animate hero/timeline out
-    document.querySelector(".container").classList.add("hidden");
-    timeline.classList.add("hidden");
+      gallery.innerHTML = ""; // clear previous
 
-    setTimeout(() => {
-      // add images with book-like fade-in
-      memories[month].forEach((src, index) => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.className = "memory";
-        img.style.opacity = 0;
-        img.style.transform = "translateY(20px)";
-        gallery.appendChild(img);
+      // fade out timeline
+      fadeOut(timeline);
 
-        setTimeout(() => {
-          img.style.transition = "all 0.5s ease";
-          img.style.opacity = 1;
-          img.style.transform = "translateY(0)";
-        }, index * 150);
-      });
+      setTimeout(()=>{
+        // add images
+        memories[month].forEach((src,index)=>{
+          const img = document.createElement("img");
+          img.src = src;
+          img.className = "memory";
+          img.style.opacity = 0;
+          img.style.transform = "translateY(20px)";
+          gallery.appendChild(img);
 
-      galleryContainer.classList.remove("hidden");
-    }, 500); // matches the fade-out duration
+          setTimeout(()=>{
+            img.style.transition = "all 0.5s ease";
+            img.style.opacity = 1;
+            img.style.transform = "translateY(0)";
+          }, index*150);
+        });
+
+        fadeIn(galleryContainer);
+      },500);
+    });
   });
-});
 
-    backButton.addEventListener("click", () => {
-  gallery.innerHTML = "";
-  galleryContainer.classList.add("hidden");
+  /* ===== BACK BUTTON ===== */
+  backButton.addEventListener("click",()=>{
+    // fade out gallery
+    fadeOut(galleryContainer);
 
-  // fade timeline and hero back in
-  document.querySelector(".container").classList.remove("hidden");
-  timeline.classList.remove("hidden");
-});
+    setTimeout(()=>{
+      gallery.innerHTML = "";
+      fadeIn(timeline);
+      fadeIn(hero);
+    },500);
+  });
     /*END HANDLER WITH BUTTON*/
   </script>
 
