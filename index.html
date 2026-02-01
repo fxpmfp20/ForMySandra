@@ -299,37 +299,38 @@
    </div>
      
   <script>
-     /* ========= 1. DATA (memories) ========= */
-  const memories = {
-    july: [
-      "july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg",
-      "july/image.jpg"
-    ],
-    august: [
-      "augusr/IMG_20250801_202844.jpg",
-      "augusr/IMG_20250801_202937.jpg"
-    ],
-    september: [
-      "sept/IMG_20250911_163403.jpg"
-    ],
-    january: [
-      "jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"
-    ]
-  };
+/* ========= 1. DATA (memories) ========= */
+const memories = {
+  july: [
+    "july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg",
+    "july/image.jpg"
+  ],
+  august: [
+    "augusr/IMG_20250801_202844.jpg",
+    "augusr/IMG_20250801_202937.jpg"
+  ],
+  september: [
+    "sept/IMG_20250911_163403.jpg"
+  ],
+  january: [
+    "jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"
+  ]
+};
 
-  /* ========= 2. DOM REFERENCES ========= */
-  const timeline = document.getElementById("timeline");
-  const galleryContainer = document.getElementById("gallery-container");
-  const gallery = document.getElementById("gallery");
-  const backButton = document.getElementById("back-button");
+/* ========= 2. DOM REFERENCES ========= */
+const timeline = document.getElementById("timeline");
+const galleryContainer = document.getElementById("gallery-container");
+const gallery = document.getElementById("gallery");
+const backButton = document.getElementById("back-button");
 
-  /* ========= 3. SHOW TIMELINE ========= */
-  function showTimeline() {
-    timeline.style.display = "block";
-    timeline.scrollIntoView({ behavior: "smooth" });
-  }
+/* ========= 3. SHOW TIMELINE ========= */
+function showTimeline() {
+  timeline.style.display = "block";
+  galleryContainer.classList.add("hidden"); // ensure gallery hidden
+  timeline.scrollIntoView({ behavior: "smooth" });
+}
 
- /* ========= 4. MONTH CLICK HANDLER ========= */
+/* ========= 4. MONTH CLICK HANDLER ========= */
 document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
@@ -363,20 +364,13 @@ document.querySelectorAll(".month-card").forEach(card => {
   });
 });
 
-      timeline.style.display = "none";
-      galleryContainer.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  });
-
-  /* ========= 5. BACK BUTTON ========= */
-  backButton.addEventListener("click", () => {
-    gallery.innerHTML = "";
-    galleryContainer.classList.add("hidden");
-    timeline.style.display = "block";
-    timeline.scrollIntoView({ behavior: "smooth" });
-  });
-  </script>
-
+/* ========= 5. BACK BUTTON ========= */
+backButton.addEventListener("click", () => {
+  gallery.innerHTML = "";
+  galleryContainer.classList.add("hidden");
+  timeline.style.display = "block";
+  timeline.scrollIntoView({ behavior: "smooth" });
+});
+</script>
 </body>
 </html>
