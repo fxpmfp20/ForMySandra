@@ -334,6 +334,8 @@ function showTimeline() {
 document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
+    console.log("Clicked month:", month, "memories:",
+                memories[month]);
     gallery.innerHTML = ""; // clear previous images
 
     if (!memories[month]) return;
