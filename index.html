@@ -167,23 +167,7 @@
       animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 5;
     }
 
-    /*book flip effect*/
-    .section {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  transition: all 0.7s ease;  /* smooth "book flip" */
-}
-
-.hidden {
-  opacity: 0;
-  transform: translateY(50px);  /* slide down */
-  pointer-events: none;         /* cannot click hidden section */
-}
-
-    /*==========END===========*/
+  
     
     @keyframes typing {
       from { width: 0; }
@@ -205,7 +189,7 @@
 <body>
 
   <!-- HERO -->
-  <div id="hero" class="container section">
+  <div class="container">
     <h1 class="typewriter">Happy Birthday, my love!</h1>
     <div class="subtitle">
       I've made this website for your special day. I hope you like it, hehe. I love you!&lt;33
@@ -214,7 +198,7 @@
   </div>
 
   <!-- TIMELINE -->
-  <section id="timeline" class="timeline-section section hidden">
+  <section id="timeline" class="timeline-section">
     <div class="timeline-wrapper">
 
       <div class="month-card" data-month="july">
