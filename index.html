@@ -298,7 +298,7 @@
   <div id="gallery"></div>
    </div>
      
-  <script>
+ <script>
 /* ========= 1. DATA (memories) ========= */
 const memories = {
   july: [
@@ -326,7 +326,7 @@ const backButton = document.getElementById("back-button");
 /* ========= 3. SHOW TIMELINE ========= */
 function showTimeline() {
   timeline.style.display = "block";
-  galleryContainer.classList.add("hidden"); // ensure gallery hidden
+  galleryContainer.classList.add("hidden"); // hide gallery
   timeline.scrollIntoView({ behavior: "smooth" });
 }
 
@@ -356,6 +356,12 @@ document.querySelectorAll(".month-card").forEach(card => {
         img.style.transform = "translateY(0)";
       }, index * 150); // 150ms delay per image
     });
+    // ====================================
+
+    timeline.style.display = "none";
+    galleryContainer.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 });
 
 /* ========= 5. BACK BUTTON ========= */
@@ -366,5 +372,6 @@ backButton.addEventListener("click", () => {
   timeline.scrollIntoView({ behavior: "smooth" });
 });
 </script>
+  
 </body>
 </html>
