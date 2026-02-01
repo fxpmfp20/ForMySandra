@@ -166,6 +166,18 @@
       border-right: 2px solid rgba(0,0,0,0.6);
       animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 5;
     }
+    
+    /*ADD1*/
+    .section {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;        /* disables clicks while hidden */
+  transform: translateY(30px); /* slightly down for “book” feel */
+}
+    /*END ADD1*/
 
   
     
@@ -270,43 +282,48 @@
       timeline.scrollIntoView({behavior:"smooth"});
     }
 
-    /* ===== MONTH CLICK HANDLER ===== */
-    document.querySelectorAll(".month-card").forEach(card=>{
-      card.addEventListener("click",()=>{
-        const month = card.dataset.month;
-        gallery.innerHTML=""; // clear previous images
+    /* ===== MONTH CLICK HANDLER (EDITED) ===== */ 
+    document.querySelectorAll(".month-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const month = card.dataset.month;
+    gallery.innerHTML = ""; // clear previous images
+    if (!memories[month]) return;
 
-        if(!memories[month]) return;
+    // Animate hero/timeline out
+    document.querySelector(".container").classList.add("hidden");
+    timeline.classList.add("hidden");
 
-        // ===== BOOK-LIKE ANIMATION =====
-        memories[month].forEach((src,index)=>{
-          const img=document.createElement("img");
-          img.src=src;
-          img.className="memory";
-          img.style.opacity=0;
-          img.style.transform="translateY(20px)";
-          gallery.appendChild(img);
+    setTimeout(() => {
+      // add images with book-like fade-in
+      memories[month].forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "memory";
+        img.style.opacity = 0;
+        img.style.transform = "translateY(20px)";
+        gallery.appendChild(img);
 
-          setTimeout(()=>{
-            img.style.transition="all 0.5s ease";
-            img.style.opacity=1;
-            img.style.transform="translateY(0)";
-          },index*150);
-        });
-
-        timeline.style.display="none";
-        galleryContainer.style.display="block";
-        window.scrollTo({top:0,behavior:"smooth"});
+        setTimeout(() => {
+          img.style.transition = "all 0.5s ease";
+          img.style.opacity = 1;
+          img.style.transform = "translateY(0)";
+        }, index * 150);
       });
-    });
 
-    /* ===== BACK BUTTON ===== */
-    backButton.addEventListener("click",()=>{
-      gallery.innerHTML="";
-      galleryContainer.style.display="none";
-      timeline.style.display="block";
-      timeline.scrollIntoView({behavior:"smooth"});
-    });
+      galleryContainer.classList.remove("hidden");
+    }, 500); // matches the fade-out duration
+  });
+});
+
+    backButton.addEventListener("click", () => {
+  gallery.innerHTML = "";
+  galleryContainer.classList.add("hidden");
+
+  // fade timeline and hero back in
+  document.querySelector(".container").classList.remove("hidden");
+  timeline.classList.remove("hidden");
+});
+    /*END HANDLER WITH BUTTON*/
   </script>
 
 </body>
