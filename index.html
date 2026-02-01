@@ -82,13 +82,9 @@
 
     /* TIMELINE SECTION */
     .timeline-section {
+      display: none;
       width: 100%;
       padding: 3rem 1rem;
-    }
-
-    .section.hidden {
-      display: none;
-    
     }
     
     .timeline-wrapper {
@@ -269,23 +265,6 @@
     </div>
   
   <script>
-    /* ===== Section transition helper ===== */
-  function showSection(from, to) {
-    const fromEl = document.getElementById(from);
-    const toEl = document.getElementById(to);
-
-    fromEl.classList.add('hidden');
-    setTimeout(() => {
-      toEl.classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
-  }
-
-  /* ===== Hero → Timeline ===== */
-  function showTimeline() {
-    showSection('hero', 'timeline');
-  }
-
   // your month click and back button code here...
     const memories = {
       july:["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg","july/image.jpg"],
