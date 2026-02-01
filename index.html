@@ -128,11 +128,6 @@
     blink 0.7s step-end 5;
 }
 
-    .typewriter {
-      white-space: normal;
-      text-align: center;
-    }
-
     .memory {
   max-width: 100%;    /* fits container width */
   height: auto;       /* keeps aspect ratio */
@@ -269,42 +264,19 @@
         <div class="month-caption">Add your memory here.</div>
       </div>
 
+      <div id="gallery-container" class="hidden">
+  <button id="back-button">Back to Highlights</button>
+  <div id="gallery"></div>
+
     </div>
   </section>
 
-   <div id="gallery-container" class="hidden">
-  <button id="back-button">Back to Highlights</button>
-  <div id="gallery"></div>
-   </div>
-     
   <script>
     function showTimeline() {
-     document.querySelectorAll(".month-card").forEach(card => {
-  card.addEventListener("click", () => {
-    const month = card.dataset.month;
-    gallery.innerHTML = "";
-
-    if (!memories[month]) return;
-
-    memories[month].forEach(src => {
-      const img = document.createElement("img");
-      img.src = src;
-      img.className = "memory";
-      gallery.appendChild(img);
-    });
-
-    document.getElementById("timeline").style.display = "none";
-    document.getElementById("gallery-container").classList.remove("hidden");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-});
-
-document.getElementById("back-button").addEventListener("click", () => {
-  gallery.innerHTML = "";
-  document.getElementById("gallery-container").classList.add("hidden");
-  document.getElementById("timeline").style.display = "block";
-  document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
-});
+      document.getElementById("timeline").style.display = "block";
+      document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
+    }
+     const gallery = document.getElementById("gallery");
 
   const memories = {
     july: ["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg", "july/image.jpg"],
@@ -314,6 +286,29 @@ document.getElementById("back-button").addEventListener("click", () => {
     september: ["sept/IMG_20250911_163403.jpg"],
     january: ["jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"]
   };
+
+  document.querySelectorAll(".month-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const month = card.dataset.month;
+      console.log("Clicked month:", month);
+      gallery.innerHTML = "";
+
+      if (!memories[month]) return;
+
+      memories[month].forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "memory";
+        gallery.appendChild(img);
+      });
+
+      gallery.scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("back-button").addEventListener("click", () => {
+  document.getElementById("gallery").innerHTML = "";
+  document.getElementById("timeline").scrollIntoView({ behavior: "smooth" });
+});
   });
   </script>
 
