@@ -334,8 +334,6 @@ function showTimeline() {
 document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
-    console.log("Clicked month:", month, "memories:",
-                memories[month]);
     gallery.innerHTML = ""; // clear previous images
 
     if (!memories[month]) return;
@@ -358,12 +356,6 @@ document.querySelectorAll(".month-card").forEach(card => {
         img.style.transform = "translateY(0)";
       }, index * 150); // 150ms delay per image
     });
-    // ====================================
-
-    timeline.style.display = "none";
-    galleryContainer.classList.remove("hidden");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
 });
 
 /* ========= 5. BACK BUTTON ========= */
