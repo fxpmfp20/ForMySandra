@@ -82,7 +82,6 @@
 
     /* TIMELINE SECTION */
     .timeline-section {
-      display: none;
       width: 100%;
       padding: 3rem 1rem;
     }
@@ -200,8 +199,8 @@
 </head>
 <body>
 
-  <!-- HERO -->
-  <div class="container">
+  <!-- HERO edited class container section -->
+  <div class="container section">                               
     <h1 class="typewriter">Happy Birthday, my love!</h1>
     <div class="subtitle">
       I've made this website for your special day. I hope you like it, hehe. I love you!&lt;33
@@ -210,7 +209,7 @@
   </div>
 
   <!-- TIMELINE -->
-  <section id="timeline" class="timeline-section">
+  <section id="timeline" class="timeline-section section hidden">
     <div class="timeline-wrapper">
 
       <div class="month-card" data-month="july">
@@ -254,8 +253,7 @@
       </div>
   </section>
    <!-- GALLERY (EDIT2) -->
-<div id="gallery-container" class="section"
-  style="opacity:0; pointer-events: none;">
+<div id="gallery-container" class="section hidden">
   <button id="back-button">← Back to Timeline</button>
   <div id="gallery"></div>
 </div>
