@@ -405,44 +405,18 @@ setTimeout(() => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   data.images.forEach((src, index) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.style.opacity = 0;
-    img.style.transform = "translateY(20px)";
-    img.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-    gallery.appendChild(img);
-    });
-  const images = gallery.querySelectorAll("img");
+  const img = document.createElement("img");
+  img.src = src;
+  img.style.opacity = 0;
+  img.style.transform = "scale(0.85)";
+  img.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+  gallery.appendChild(img);
 
-const updateImageCurve = () => {
-  const center = gallery.scrollTop + gallery.clientHeight / 2;
-
-  images.forEach(img => {
-    const imgCenter =
-      img.offsetTop + img.offsetHeight / 2;
-
-    const distance = imgCenter - center;
-    const normalized = distance / gallery.clientHeight;
-
-    const scale = 1 - Math.abs(normalized) * 0.3;
-    const opacity = 1 - Math.abs(normalized) * 0.6;
-    const xShift = normalized * 40;
-
-    img.style.transform = `
-      translateX(${xShift}px)
-      scale(${Math.max(scale, 0.7)})
-    `;
-    img.style.opacity = Math.max(opacity, 0.4);
-  });
-};
-
-gallery.addEventListener("scroll", updateImageCurve);
-updateImageCurve();
-
-    setTimeout(() => {
-      img.style.opacity = 1;
-      img.style.transform = "translateY(0)";
-    }, index * 120);
+  setTimeout(() => {
+    img.style.opacity = 1;
+    img.style.transform = "translateY(0)";
+  }, index * 120);
+});
   });
 
   galleryContainer.classList.remove("hidden");
@@ -475,7 +449,7 @@ const updateMonthCurve = () => {
     const scale = 1 - Math.abs(normalized) * 0.25;
     const opacity = 1 - Math.abs(normalized) * 0.6;
 
-    card.style.transform = scale(${Math.max(scale, 0.75)});
+    card.style.transform = 'scale(${Math.max(scale, 0.75)})';
     card.style.opacity = Math.max(opacity, 0.4);
   });
 };
