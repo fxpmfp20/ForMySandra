@@ -155,6 +155,57 @@
       border-radius: 12px;
     }
 
+    .gallery-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* LEFT: image strip */
+.image-strip {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+
+.image-strip::-webkit-scrollbar {
+  height: 8px;
+}
+
+.image-strip::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.4);
+  border-radius: 10px;
+}
+
+.image-strip img {
+  height: 260px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* RIGHT: message box */
+.message-box {
+  width: 35%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: left;
+}
+
+.message-box h2 {
+  margin-bottom: 0.5rem;
+}
+
+.message-box p {
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
     /*typewriting effect*/
 
      .typewriter {
@@ -191,6 +242,26 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
+
+    @media (max-width: 768px) {
+  .gallery-layout {
+    flex-direction: column;
+  }
+
+  .message-box {
+    width: 100%;
+  }
+
+  .image-strip img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .typewriter { font-size: 2rem; }
+  .subtitle { font-size: 1rem; }
+}
+
 
     /* ================== MOBILE ================== */
     @media (max-width: 600px) {
@@ -258,7 +329,15 @@
    <!-- GALLERY (EDIT2) -->
 <div id="gallery-container" class="section hidden">
   <button id="back-button">← Back to Timeline</button>
-  <div id="gallery"></div>
+
+  <div class="gallery-layout">
+    <div id="gallery" class="image-strip"></div>
+
+    <div class="message-box">
+      <h2 id="month-title"></h2>
+      <p id="month-message"></p>
+    </div>
+  </div>
 </div>
   
   <script>
@@ -267,11 +346,23 @@
     
   // your month click and back button code here...
     const memories = {
-      july:["july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg","july/image.jpg"],
-      august:["augusr/IMG_20250801_202844.jpg","augusr/IMG_20250801_202937.jpg"],
-      september:["sept/IMG_20250911_163403.jpg"],
-      january:["jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg"]
-    };
+  july: {
+    title: "July 2025",
+    message: "This was the month everything started to feel real.",
+    images: [
+      "july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg",
+      "july/image.jpg"
+    ]
+  },
+  august: {
+    title: "August 2025",
+    message: "Late nights, laughter, and moments I’ll never forget.",
+    images: [
+      "augusr/IMG_20250801_202844.jpg",
+      "augusr/IMG_20250801_202937.jpg"
+    ]
+  }
+};
 
     /* ===== DOM REFERENCES ===== */
     const timeline = document.getElementById("timeline");
@@ -290,33 +381,35 @@
  document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
-    gallery.innerHTML = "";
+    const data = memories[month];
+if (!data) return;
 
-    if (!memories[month]) return;
+document.getElementById("month-title").textContent = data.title;
+document.getElementById("month-message").textContent = data.message;
 
-    // fade timeline out
-    timeline.classList.add("hidden");
+gallery.innerHTML = "";
+
+timeline.classList.add("hidden");
+
+setTimeout(() => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  data.images.forEach((src, index) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.style.opacity = 0;
+    img.style.transform = "translateY(20px)";
+    img.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    gallery.appendChild(img);
 
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth"});
-      
-      // load images
-      memories[month].forEach((src, index) => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.style.opacity = 0;
-        img.style.transform = "translateY(20px)";
-        img.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-        gallery.appendChild(img);
+      img.style.opacity = 1;
+      img.style.transform = "translateY(0)";
+    }, index * 120);
+  });
 
-        setTimeout(() => {
-          img.style.opacity = 1;
-          img.style.transform = "translateY(0)";
-        }, index * 150);
-      });
-
-     galleryContainer.classList.remove("hidden");
-    }, 500);
+  galleryContainer.classList.remove("hidden");
+}, 400);
       });
   });
     
