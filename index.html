@@ -131,11 +131,17 @@
 /*gallery*/
     
     #gallery-container {
-      padding: 2rem;
-      overflow-y: auto;
-      width: 100%;
-      text-align: center;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  background: transparent;
+  overflow-y: auto;
+  text-align: center;
+  z-index: 20;
+}
 
     #gallery {
       display: flex;
