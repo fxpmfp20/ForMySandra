@@ -294,6 +294,8 @@
     timeline.classList.add("hidden");
 
     setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth"});
+      
       // load images
       memories[month].forEach((src, index) => {
         const img = document.createElement("img");
@@ -310,6 +312,7 @@
       });
 
       galleryContainer.classList.remove("hidden");
+      galleryContainer.scrollIntoView({ behavior: "smooth" });
     }, 500);
   });
     
