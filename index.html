@@ -279,51 +279,51 @@
 
     /* ===== SHOW TIMELINE ===== */
     function showTimeline() {
-      timeline.style.display = "block";
-      galleryContainer.style.display = "none";
-      timeline.scrollIntoView({behavior:"smooth"});
-    }
+     document.querySelector(".container").classList.add("hidden");
+  timeline.classList.remove("hidden");
+  timeline.scrollIntoView({ behavior: "smooth" });
+}
 
     /* ===== MONTH CLICK HANDLER (EDITED) ===== */ 
-  document.querySelectorAll(".month-card").forEach(card => {
+ document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
-    gallery.innerHTML = ""; // clear previous images
+    gallery.innerHTML = "";
+
     if (!memories[month]) return;
 
-    // Animate hero/timeline out
-    document.querySelector(".container").classList.add("hidden");
+    // fade timeline out
     timeline.classList.add("hidden");
 
     setTimeout(() => {
-      // add images with book-like fade-in
+      // load images
       memories[month].forEach((src, index) => {
         const img = document.createElement("img");
         img.src = src;
-        img.className = "memory";
         img.style.opacity = 0;
         img.style.transform = "translateY(20px)";
+        img.style.transition = "opacity 0.5s ease, transform 0.5s ease";
         gallery.appendChild(img);
 
         setTimeout(() => {
-          img.style.transition = "all 0.5s ease";
           img.style.opacity = 1;
           img.style.transform = "translateY(0)";
         }, index * 150);
       });
 
       galleryContainer.classList.remove("hidden");
-    }, 500); // matches the fade-out duration
+      galleryContainer.scrollIntoView({ behavior: "smooth" });
+    }, 500);
   });
 });
-
-    backButton.addEventListener("click", () => {
+    
+  backButton.addEventListener("click", () => {
   gallery.innerHTML = "";
   galleryContainer.classList.add("hidden");
 
-  // fade timeline and hero back in
-  document.querySelector(".container").classList.remove("hidden");
   timeline.classList.remove("hidden");
+  timeline.scrollIntoView({ behavior: "smooth" });
+});
 });
 
     /*END HANDLER WITH BUTTON*/
