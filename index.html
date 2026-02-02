@@ -87,12 +87,15 @@
     }
     
     .timeline-wrapper {
-      display: flex;
-      gap: 2rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      scroll-behavior: smooth;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  height: 70vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding: 2rem 0;
+}
 
     .timeline-wrapper::-webkit-scrollbar {
       height: 8px;
@@ -104,13 +107,13 @@
     }
 
     .month-card {
-      min-width: 260px;
+      min-width: 280px;
       background: rgba(255,255,255,0.15);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 1.5rem;
       text-align: left;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
     .month-card:hover {
@@ -164,15 +167,17 @@
 /* LEFT: image strip */
 .image-strip {
   flex: 1;
+  height: 70vh;
+  overflow-y: auto;
   display: flex;
-  gap: 1rem;
-  overflow-x: auto;
+  flex-direction: column;
+  gap: 2rem;
   scroll-behavior: smooth;
-  padding-bottom: 1rem;
+  padding: 2rem 1rem;
 }
 
 .image-strip::-webkit-scrollbar {
-  height: 8px;
+  width: 6px;
 }
 
 .image-strip::-webkit-scrollbar-thumb {
@@ -182,9 +187,11 @@
 
 .image-strip img {
   height: 260px;
-  flex-shrink: 0;
-  border-radius: 12px;
+  width: auto;
+  align-self: center;
+  border-radius: 16px;
   object-fit: cover;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 /* RIGHT: message box */
@@ -404,6 +411,33 @@ setTimeout(() => {
     img.style.transform = "translateY(20px)";
     img.style.transition = "opacity 0.4s ease, transform 0.4s ease";
     gallery.appendChild(img);
+    });
+  const images = gallery.querySelectorAll("img");
+
+const updateImageCurve = () => {
+  const center = gallery.scrollTop + gallery.clientHeight / 2;
+
+  images.forEach(img => {
+    const imgCenter =
+      img.offsetTop + img.offsetHeight / 2;
+
+    const distance = imgCenter - center;
+    const normalized = distance / gallery.clientHeight;
+
+    const scale = 1 - Math.abs(normalized) * 0.3;
+    const opacity = 1 - Math.abs(normalized) * 0.6;
+    const xShift = normalized * 40;
+
+    img.style.transform = `
+      translateX(${xShift}px)
+      scale(${Math.max(scale, 0.7)})
+    `;
+    img.style.opacity = Math.max(opacity, 0.4);
+  });
+};
+
+gallery.addEventListener("scroll", updateImageCurve);
+updateImageCurve();
 
     setTimeout(() => {
       img.style.opacity = 1;
@@ -424,6 +458,30 @@ setTimeout(() => {
   timeline.scrollIntoView({ behavior: "smooth" });
 });
 
+    const timelineWrapper = document.querySelector(".timeline-wrapper");
+const monthCards = timelineWrapper.querySelectorAll(".month-card");
+
+const updateMonthCurve = () => {
+  const center =
+    timelineWrapper.scrollTop + timelineWrapper.clientHeight / 2;
+
+  monthCards.forEach(card => {
+    const cardCenter =
+      card.offsetTop + card.offsetHeight / 2;
+
+    const distance = cardCenter - center;
+    const normalized = distance / timelineWrapper.clientHeight;
+
+    const scale = 1 - Math.abs(normalized) * 0.25;
+    const opacity = 1 - Math.abs(normalized) * 0.6;
+
+    card.style.transform = scale(${Math.max(scale, 0.75)});
+    card.style.opacity = Math.max(opacity, 0.4);
+  });
+};
+
+timelineWrapper.addEventListener("scroll", updateMonthCurve);
+updateMonthCurve();
     /*END HANDLER WITH BUTTON*/
   </script>
 
