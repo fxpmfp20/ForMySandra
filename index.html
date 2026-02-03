@@ -87,15 +87,12 @@
     }
     
     .timeline-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  height: 70vh;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  padding: 2rem 0;
-}
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scroll-behavior: smooth;
+    }
 
     .timeline-wrapper::-webkit-scrollbar {
       height: 8px;
@@ -107,13 +104,13 @@
     }
 
     .month-card {
-      min-width: 280px;
+      min-width: 260px;
       background: rgba(255,255,255,0.15);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 1.5rem;
       text-align: left;
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      transition: transform 0.3s ease;
     }
 
     .month-card:hover {
@@ -167,17 +164,15 @@
 /* LEFT: image strip */
 .image-strip {
   flex: 1;
-  height: 70vh;
-  overflow-y: auto;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
+  overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 2rem 1rem;
+  padding-bottom: 1rem;
 }
 
 .image-strip::-webkit-scrollbar {
-  width: 6px;
+  height: 8px;
 }
 
 .image-strip::-webkit-scrollbar-thumb {
@@ -187,11 +182,9 @@
 
 .image-strip img {
   height: 260px;
-  width: auto;
-  align-self: center;
-  border-radius: 16px;
+  flex-shrink: 0;
+  border-radius: 12px;
   object-fit: cover;
-  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 /* RIGHT: message box */
@@ -233,7 +226,7 @@
 .hidden {
   opacity: 0;
   pointer-events: none;        /* disables clicks while hidden */
-  transform: translateY(30px); /* slightly down for “book” feel */
+  transform: translateY(30px); /* slightly down for â€œbookâ€ feel */
   position: absolute;
   inset: 0;
 }
@@ -335,7 +328,7 @@
   </section>
    <!-- GALLERY (EDIT2) -->
 <div id="gallery-container" class="section hidden">
-  <button id="back-button">← Back to Timeline</button>
+  <button id="back-button">â† Back to Timeline</button>
 
   <div class="gallery-layout">
     <div id="gallery" class="image-strip"></div>
@@ -363,7 +356,7 @@
   },
   august: {
     title: "August 2025",
-    message: "Late nights, laughter, and moments I’ll never forget.",
+    message: "Late nights, laughter, and moments Iâ€™ll never forget.",
     images: [
       "augusr/IMG_20250801_202844.jpg",
       "augusr/IMG_20250801_202937.jpg",
@@ -405,18 +398,17 @@ setTimeout(() => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   data.images.forEach((src, index) => {
-  const img = document.createElement("img");
-  img.src = src;
-  img.style.opacity = 0;
-  img.style.transform = "scale(0.85)";
-  img.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-  gallery.appendChild(img);
+    const img = document.createElement("img");
+    img.src = src;
+    img.style.opacity = 0;
+    img.style.transform = "translateY(20px)";
+    img.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    gallery.appendChild(img);
 
-  setTimeout(() => {
-    img.style.opacity = 1;
-    img.style.transform = "translateY(0)";
-  }, index * 120);
-});
+    setTimeout(() => {
+      img.style.opacity = 1;
+      img.style.transform = "translateY(0)";
+    }, index * 120);
   });
 
   galleryContainer.classList.remove("hidden");
@@ -432,30 +424,6 @@ setTimeout(() => {
   timeline.scrollIntoView({ behavior: "smooth" });
 });
 
-    const timelineWrapper = document.querySelector(".timeline-wrapper");
-const monthCards = timelineWrapper.querySelectorAll(".month-card");
-
-const updateMonthCurve = () => {
-  const center =
-    timelineWrapper.scrollTop + timelineWrapper.clientHeight / 2;
-
-  monthCards.forEach(card => {
-    const cardCenter =
-      card.offsetTop + card.offsetHeight / 2;
-
-    const distance = cardCenter - center;
-    const normalized = distance / timelineWrapper.clientHeight;
-
-    const scale = 1 - Math.abs(normalized) * 0.25;
-    const opacity = 1 - Math.abs(normalized) * 0.6;
-
-    card.style.transform = 'scale(${Math.max(scale, 0.75)})';
-    card.style.opacity = Math.max(opacity, 0.4);
-  });
-};
-
-timelineWrapper.addEventListener("scroll", updateMonthCurve);
-updateMonthCurve();
     /*END HANDLER WITH BUTTON*/
   </script>
 
