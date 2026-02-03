@@ -1,6 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8" />
+<title>Private Access</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(120deg, #ff9acb, #b36bff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  /* PASSWORD SCREEN */
+  #lock-screen {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+  }
+
+  #lock-screen h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #lock-screen p {
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  input {
+    padding: 12px 16px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    width: 220px;
+    text-align: center;
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 10px 26px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    background: white;
+    color: #b36bff;
+    font-size: 1rem;
+  }
+
+  .error {
+    margin-top: 1rem;
+    color: #ffd1e8;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .shake {
+    animation: shake 0.4s;
+  }
+
+  /* MAIN SITE */
+  #main-site {
+    display: none;
+    width: 100%;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-6px); }
+    100% { transform: translateX(0); }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- 🔒 LOCK SCREEN -->
+<div id="lock-screen">
+  <h1>Private</h1>
+  <p>Enter the password to continue</p>
+
+  <input type="password" id="passwordInput" placeholder="Password" />
+  <br />
+  <button onclick="checkPassword()">Enter</button>
+
+  <div class="error" id="errorMsg">Wrong password</div>
+</div>
+
+<!-- 🌸 YOUR REAL SITE GOES HERE -->
+<div id="main-site">
+  <!-- PASTE YOUR ENTIRE EXISTING WEBSITE HERE -->
+  <!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <title>ForMyXandra</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -426,6 +536,37 @@ setTimeout(() => {
 
     /*END HANDLER WITH BUTTON*/
   </script>
+
+</body>
+</html>
+</div>
+
+<script>
+  // 🔑 CHANGE PASSWORD HERE
+  const PASSWORD = "aabjna072325";
+
+  function checkPassword() {
+    const input = document.getElementById("passwordInput");
+    const error = document.getElementById("errorMsg");
+
+    if (input.value === PASSWORD) {
+      document.getElementById("lock-screen").style.display = "none";
+      document.getElementById("main-site").style.display = "block";
+      document.body.style.background = "none";
+      document.body.style.display = "block";
+    } else {
+      error.style.opacity = 1;
+      input.classList.add("shake");
+      setTimeout(() => input.classList.remove("shake"), 400);
+    }
+  }
+
+  // allow Enter key
+  document.getElementById("passwordInput")
+    .addEventListener("keydown", e => {
+      if (e.key === "Enter") checkPassword();
+    });
+</script>
 
 </body>
 </html>
