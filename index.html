@@ -82,10 +82,8 @@
 
     /* TIMELINE SECTION */
     .timeline-section {
-      min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
       padding: 2rem;
     }
     
@@ -384,7 +382,7 @@
   timeline.classList.remove("hidden");
 
       requestAnimationFrame(() => {       /*added new for scroll vertical*/
-  timeline.scrollIntoView({ behavior: "smooth", block: "center"      /*added block:center*/
+  timeline.scrollIntoView({ behavior: "smooth", block: "start"      /*added block:center*/
     });
   })
 }
