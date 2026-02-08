@@ -82,20 +82,25 @@
 
     /* TIMELINE SECTION */
     .timeline-section {
-      width: 100%;
-      padding: 3rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
     
     .timeline-wrapper {
       display: flex;
-      gap: 2rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-height: 70vh;
+      overflow-y: auto;
+      padding-right: 0.5rem;
       scroll-behavior: smooth;
     }
 
     .timeline-wrapper::-webkit-scrollbar {
-      height: 8px;
+      width: 8px;
     }
 
     .timeline-wrapper::-webkit-scrollbar-thumb {
@@ -377,7 +382,11 @@
     function showTimeline() {
      document.querySelector(".container").classList.add("hidden");
   timeline.classList.remove("hidden");
-  timeline.scrollIntoView({ behavior: "smooth" });
+
+      requestAnimationFrame(() => {       /*added new for scroll vertical*/
+  timeline.scrollIntoView({ behavior: "smooth", block: "center"      /*added block:center*/
+    });
+  })
 }
 
     /* ===== MONTH CLICK HANDLER (EDITED) ===== */ 
