@@ -470,6 +470,10 @@ setTimeout(() => {
   });
 
   galleryContainer.classList.remove("hidden");
+
+  backButton.style.opacity = "1";
+  backButton.style.pointerEvents = "auto";
+  
 }, 400);
       });
   });
@@ -482,8 +486,6 @@ setTimeout(() => {
   backButton.style.pointerEvents = "none";
     
   timeline.classList.remove("hidden");
-  backButton.style.opacity = "1";
-  backButton.style.pointerEvents = "auto";
   timeline.scrollIntoView({ behavior: "smooth" });
 });
 
