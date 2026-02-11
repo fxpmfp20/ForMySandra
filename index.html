@@ -137,11 +137,13 @@
     
     #gallery-container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   padding: 2rem;
   background: transparent;
-  text-align: center;
-  overflow-y: auto;
+  /*removed text-align: center; */
+  overflow: hidden;
+  display: flex;
+  flex-align: column;
 }
 
     #gallery {
