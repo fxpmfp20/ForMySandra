@@ -67,7 +67,7 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-
+/*
     #back-button {
       display: block;
       margin: 20px auto;
@@ -79,7 +79,41 @@
       z-index: 10;
       
     }
+*/
+    #back-button {
+  opacity: 0;
+  pointer-events: none;
+      
+  position: fixed;
+  top: 20px;
+  right: 20px;
 
+  width: 55px;
+  height: 55px;
+
+  background: #ff66cc;
+  color: white;
+  border: none;
+  border-radius: 50%;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  z-index: 999;
+}
+
+    #back-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+}
     /* TIMELINE SECTION */
     .timeline-section {
       min-height: 100vh;
@@ -165,7 +199,7 @@
   display: flex;
   gap: 2rem;
   align-items: flex-start;
-  height: calc(100vh-80px);
+  height: calc(100vh - 80px);
 }
 
 /* LEFT: image strip */
@@ -197,7 +231,7 @@
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-.image-strip img: hover; {
+.image-strip img:hover {
   transform: scale(1.03);
   opacity: 1;
 }
@@ -347,8 +381,7 @@
   </section>
    <!-- GALLERY (EDIT2) -->
 <div id="gallery-container" class="section hidden">
-  <button id="back-button">← Back to Timeline</button>
-
+ <button id="back-button">←</button>
   <div class="gallery-layout">
     <div id="gallery" class="image-strip"></div>
 
@@ -443,7 +476,12 @@ setTimeout(() => {
   gallery.innerHTML = "";
   galleryContainer.classList.add("hidden");
 
+  backButton.style.opacity = "0";
+  backButton.style.pointerEvents = "none";
+    
   timeline.classList.remove("hidden");
+  backButton.style.opacity = "1";
+  backButton.style.pointerEvents = "auto";
   timeline.scrollIntoView({ behavior: "smooth" });
 });
 
