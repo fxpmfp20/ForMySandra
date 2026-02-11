@@ -280,9 +280,11 @@
   opacity: 0;
   pointer-events: none;        /* disables clicks while hidden */
   transform: translateY(30px); /* slightly down for “book” feel */
+  /*
   position: absolute;
   inset: 0;
 }
+  */
     /*END ADD1*/
 
   
@@ -480,6 +482,8 @@ setTimeout(() => {
   backButton.style.pointerEvents = "none";
     
   timeline.classList.remove("hidden");
+  backButton.style.opacity = "1";
+  backButton.style.pointerEvents = "auto";
   timeline.scrollIntoView({ behavior: "smooth" });
 });
 
