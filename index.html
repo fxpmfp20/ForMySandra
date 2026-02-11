@@ -172,14 +172,15 @@
 .image-strip {
   flex: 1;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
-  overflow-x: auto;
+  overflow-y: auto;
   scroll-behavior: smooth;
-  padding-bottom: 1rem;
+  padding-right: 0.5rem;
 }
 
 .image-strip::-webkit-scrollbar {
-  height: 8px;
+  width: 6px;
 }
 
 .image-strip::-webkit-scrollbar-thumb {
@@ -188,20 +189,33 @@
 }
 
 .image-strip img {
-  height: 260px;
-  flex-shrink: 0;
-  border-radius: 12px;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  align-self: center;
+  border-radius: 14px;
   object-fit: cover;
+  opacity: 0.95;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.image-strip img:hover; {
+  transform: scale(1.03);
+  opacity: 1;
 }
 
 /* RIGHT: message box */
 .message-box {
   width: 35%;
+  max-height: 70vh;
+  overflow-y: auto;
+  /*
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: 16px;
   text-align: left;
+  */
 }
 
 .message-box h2 {
