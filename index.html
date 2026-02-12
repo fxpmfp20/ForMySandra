@@ -22,6 +22,8 @@
       animation: gradientMove 10s ease infinite;
       color: white;
       overflow-x: hidden;
+      position: relative;
+      overflow: hidden;
     }
 
     @keyframes gradientMove {
@@ -273,11 +275,15 @@
     
     /*ADD1*/
     .section {
-  transition: opacity 0.5s ease, transform 0.5s ease;
+      position: absolute;
+      inset: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .hidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(40px);
 }
     /*
   opacity: 0;
@@ -437,6 +443,9 @@
      document.querySelector(".container").classList.add("hidden");
   timeline.classList.remove("hidden");
 
+      backButton.style.opacity = "1";
+  backButton.style.pointerEvents = "auto";
+      
       requestAnimationFrame(() => {       /*added new for scroll vertical*/
   timeline.scrollIntoView({ behavior: "smooth", block: "start"      /*added block:center*/
     });
@@ -483,7 +492,7 @@ requestAnimationFrame(() => {
 }, 400);
       });
   });
-    
+  /*  
   backButton.addEventListener("click", () => {
   gallery.innerHTML = "";
   galleryContainer.classList.add("hidden");
@@ -493,6 +502,29 @@ requestAnimationFrame(() => {
     
   timeline.classList.remove("hidden");
   timeline.scrollIntoView({ behavior: "smooth" });
+});*/
+    backButton.addEventListener("click", () => {
+
+  // If gallery is visible
+  if (!galleryContainer.classList.contains("hidden")) {
+
+    gallery.innerHTML = "";
+    galleryContainer.classList.add("hidden");
+    timeline.classList.remove("hidden");
+
+    return;
+  }
+
+  // If timeline is visible
+  if (!timeline.classList.contains("hidden")) {
+
+    timeline.classList.add("hidden");
+    document.querySelector(".container").classList.remove("hidden");
+
+    backButton.style.opacity = "0";
+    backButton.style.pointerEvents = "none";
+
+  }
 });
 
     /*END HANDLER WITH BUTTON*/
