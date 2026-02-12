@@ -16,14 +16,13 @@
     }
 
     body {
-      min-height: 100vh;
+      min-height: 100dvh;
       background: linear-gradient(120deg, #ff9acb, #b36bff);
       background-size: 300% 300%;
       animation: gradientMove 10s ease infinite;
       color: white;
       overflow-x: hidden;
       position: relative;
-      overflow: hidden;
     }
 
     @keyframes gradientMove {
@@ -33,7 +32,7 @@
     }
 
     .container {
-      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -118,7 +117,7 @@
 }
     /* TIMELINE SECTION */
     .timeline-section {
-      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -173,7 +172,7 @@
     
     #gallery-container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 2rem;
   background: transparent;
   /*removed text-align: center; */
@@ -201,7 +200,7 @@
   display: flex;
   gap: 2rem;
   align-items: flex-start;
-  height: calc(100vh - 80px);
+  min-height: 100%;
 }
 
 /* LEFT: image strip */
