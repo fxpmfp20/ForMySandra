@@ -622,10 +622,14 @@ if (month === "february") {
   finalBtn.textContent = "Read My Final Message";
   finalBtn.style.marginTop = "20px";
 
-  finalBtn.onclick = () => {
-    galleryContainer.classList.add("hidden");
+ finalBtn.onclick = () => {
+  galleryContainer.classList.add("hidden");
+
+  setTimeout(() => {
     document.getElementById("final-section").classList.remove("hidden");
-  };
+  }, 400);
+};
+
 
   // append under message box instead of gallery
   const messageBox = document.querySelector(".message-box");
