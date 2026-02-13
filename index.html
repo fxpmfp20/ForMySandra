@@ -297,12 +297,29 @@
   */
     /*END ADD1*/
 
-    #final-section {
+   #final-section {
+  position: absolute;
+  inset: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   padding: 2rem;
+}
+
+.final-content {
+  max-width: 650px;
+  width: 100%;
   text-align: center;
+}
+
+.final-content p {
+  text-align: justify;
+  text-align-last: center;
+  margin-top: 1rem;
+  line-height: 1.8;
+}
 }
 
 .final-content {
@@ -595,6 +612,10 @@
     const data = memories[month];
 if (!data) return;
 
+    // Remove old February button if it exists
+const oldBtn = document.querySelector(".message-box button");
+if (oldBtn) oldBtn.remove();
+
 document.getElementById("month-title").textContent = data.title;
 document.getElementById("month-message").textContent = data.message;
 
@@ -611,6 +632,7 @@ requestAnimationFrame(() => {
 
 // If February, add final button
 if (month === "february") {
+
   const finalBtn = document.createElement("button");
   finalBtn.textContent = "Read My Final Message";
   finalBtn.style.marginTop = "20px";
@@ -620,7 +642,9 @@ if (month === "february") {
     document.getElementById("final-section").classList.remove("hidden");
   };
 
-  gallery.appendChild(finalBtn);
+  // append under message box instead of gallery
+  const messageBox = document.querySelector(".message-box");
+  messageBox.appendChild(finalBtn);
 }
   
   data.images.forEach((src, index) => {
