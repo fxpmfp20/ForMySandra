@@ -297,8 +297,32 @@
   */
     /*END ADD1*/
 
-  
-    
+    #final-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.final-content {
+  max-width: 600px;
+}
+
+.final-content p {
+  text-align: justify;
+  text-align-last: center;
+  margin-top: 1rem;
+  line-height: 1.7;
+}
+
+.final-content a {
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+   
     @keyframes typing {
       from { width: 0; }
       to { width: 100%; border-right-color: transparent; }
@@ -404,6 +428,26 @@
     </div>
   </div>
 </div>
+  <!-- FINAL MESSAGE SECTION -->
+<section id="final-section" class="section hidden">
+  <div class="final-content">
+    <h2>For You ❤️</h2>
+    <p>
+      This is my final message for you.
+      No matter what happens, I’m grateful for every single moment
+      we’ve shared together.
+
+      I hope this small website reminds you how much you mean to me.
+    </p>
+
+    <p>
+      Click here:
+      <a href="https://example.com" target="_blank">
+        Our Special Link
+      </a>
+    </p>
+  </div>
+</section> 
   
   <script>
     /*EDIT2*/
@@ -564,6 +608,21 @@ setTimeout(() => {
 requestAnimationFrame(() => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
+// If February, add final button
+if (month === "february") {
+  const finalBtn = document.createElement("button");
+  finalBtn.textContent = "Read My Final Message";
+  finalBtn.style.marginTop = "20px";
+
+  finalBtn.onclick = () => {
+    galleryContainer.classList.add("hidden");
+    document.getElementById("final-section").classList.remove("hidden");
+  };
+
+  gallery.appendChild(finalBtn);
+}
+  
   data.images.forEach((src, index) => {
     const img = document.createElement("img");
     img.src = src;
@@ -595,7 +654,8 @@ requestAnimationFrame(() => {
   timeline.classList.remove("hidden");
   timeline.scrollIntoView({ behavior: "smooth" });
 });*/
-    backButton.addEventListener("click", () => {
+    
+  /*  backButton.addEventListener("click", () => {
 
   // If gallery is visible
   if (!galleryContainer.classList.contains("hidden")) {
@@ -617,6 +677,36 @@ requestAnimationFrame(() => {
     backButton.style.pointerEvents = "none";
 
   }
+}); */
+
+    backButton.addEventListener("click", () => {
+
+  const finalSection = document.getElementById("final-section");
+
+  // If final section visible
+  if (!finalSection.classList.contains("hidden")) {
+    finalSection.classList.add("hidden");
+    galleryContainer.classList.remove("hidden");
+    return;
+  }
+
+  // If gallery visible
+  if (!galleryContainer.classList.contains("hidden")) {
+    gallery.innerHTML = "";
+    galleryContainer.classList.add("hidden");
+    timeline.classList.remove("hidden");
+    return;
+  }
+
+  // If timeline visible
+  if (!timeline.classList.contains("hidden")) {
+    timeline.classList.add("hidden");
+    document.querySelector(".container").classList.remove("hidden");
+
+    backButton.style.opacity = "0";
+    backButton.style.pointerEvents = "none";
+  }
+
 });
 
     /*END HANDLER WITH BUTTON*/
