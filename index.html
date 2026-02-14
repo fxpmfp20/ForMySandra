@@ -600,7 +600,7 @@ body > *:not(#romantic-bg):not(#back-button) {
   backButton.style.pointerEvents = "auto";
       
       requestAnimationFrame(() => {       /*added new for scroll vertical*/
-  timeline.scrollIntoView({ behavior: "smooth", block: "start"      /*added block:center*/
+  timeline.scrollIntoView({ behavior: "smooth", block: "center"      /*added block:center*/
     });
   })
 }
@@ -626,8 +626,8 @@ timeline.classList.add("hidden");
 setTimeout(() => {
 
   galleryContainer.classList.remove("hidden");
-requestAnimationFrame(() => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+/*requestAnimationFrame(() => {
+  window.scrollTo({ top: 0, behavior: "smooth" });*/
 });
 
 // If February, add final button
@@ -723,6 +723,12 @@ if (month === "february") {
     gallery.innerHTML = "";
     galleryContainer.classList.add("hidden");
     timeline.classList.remove("hidden");
+    return;
+
+    requestAnimationFrame(() => {
+      timeline.scrollIntoView({ behavior: "auto", block: "center" });
+    });
+
     return;
   }
 
