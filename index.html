@@ -626,10 +626,11 @@ timeline.classList.add("hidden");
 setTimeout(() => {
 
   galleryContainer.classList.remove("hidden");
-}, 400);
-/*requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
   window.scrollTo({ top: 0, behavior: "smooth" });
-}); */
+  }); 
+  
+}, 400);
 
 // If February, add final button
 if (month === "february") {
