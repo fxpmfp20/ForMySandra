@@ -68,19 +68,7 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-/*
-    #back-button {
-      display: block;
-      margin: 20px auto;
-      background: #ff66cc;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 10;
-      
-    }
-*/
+
     #back-button {
   opacity: 0;
   pointer-events: none;
@@ -187,7 +175,6 @@ body > *:not(#romantic-bg):not(#back-button) {
   min-height: 100dvh;
   padding: 2rem;
   background: transparent;
-  /*removed text-align: center; */
   overflow-x: hidden;
   display: flex;
 }
@@ -254,13 +241,6 @@ body > *:not(#romantic-bg):not(#back-button) {
   width: 35%;
   max-height: 70vh;
   overflow-y: auto;
-  /*
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 16px;
-  text-align: left;
-  */
 }
 
 .message-box h2 {
@@ -281,7 +261,7 @@ body > *:not(#romantic-bg):not(#back-button) {
       overflow: hidden;
       text-align: center;
       border-right: 2px solid rgba(0,0,0,0.6);
-      animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 5;
+      animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 3;
     }
     
     /*ADD1*/
@@ -583,7 +563,7 @@ body > *:not(#romantic-bg):not(#back-button) {
   backButton.style.pointerEvents = "auto";
       
       requestAnimationFrame(() => {       /*added new for scroll vertical*/
-  timeline.scrollIntoView({ behavior: "smooth", block: "center"      /*added block:center*/
+  timeline.scrollIntoView({ behavior: "smooth", block: "start"      /*added block:center*/
     });
   })
 }
@@ -610,7 +590,7 @@ setTimeout(() => {
 
   galleryContainer.classList.remove("hidden");
   requestAnimationFrame(() => {
-  window.scrollTo({ top: 0, behavior: "auto" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
   }); 
   
 }, 400);
@@ -655,41 +635,7 @@ if (month === "february") {
     
       });
   });
-  /*  
-  backButton.addEventListener("click", () => {
-  gallery.innerHTML = "";
-  galleryContainer.classList.add("hidden");
-
-  backButton.style.opacity = "0";
-  backButton.style.pointerEvents = "none";
-    
-  timeline.classList.remove("hidden");
-  timeline.scrollIntoView({ behavior: "smooth" });
-});*/
-    
-  /*  backButton.addEventListener("click", () => {
-
-  // If gallery is visible
-  if (!galleryContainer.classList.contains("hidden")) {
-
-    gallery.innerHTML = "";
-    galleryContainer.classList.add("hidden");
-    timeline.classList.remove("hidden");
-
-    return;
-  }
-
-  // If timeline is visible
-  if (!timeline.classList.contains("hidden")) {
-
-    timeline.classList.add("hidden");
-    document.querySelector(".container").classList.remove("hidden");
-
-    backButton.style.opacity = "0";
-    backButton.style.pointerEvents = "none";
-
-  }
-}); */
+  
 
     backButton.addEventListener("click", () => {
 
