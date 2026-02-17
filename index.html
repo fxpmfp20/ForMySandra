@@ -68,7 +68,19 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-
+/*
+    #back-button {
+      display: block;
+      margin: 20px auto;
+      background: #ff66cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10;
+      
+    }
+*/
     #back-button {
   opacity: 0;
   pointer-events: none;
@@ -163,7 +175,7 @@
   pointer-events: none;
 }
 
-body > *:not(#romantic-bg):not(#back-button) {
+body > *:not(#romantic-bg) {
   position: relative;
   z-index: 1;
 }
@@ -172,9 +184,10 @@ body > *:not(#romantic-bg):not(#back-button) {
     
     #gallery-container {
   width: 100%;
-  min-height: 100dvh;
+  min-height: 100vh;
   padding: 2rem;
   background: transparent;
+  /*removed text-align: center; */
   overflow-x: hidden;
   display: flex;
 }
@@ -241,6 +254,13 @@ body > *:not(#romantic-bg):not(#back-button) {
   width: 35%;
   max-height: 70vh;
   overflow-y: auto;
+  /*
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: left;
+  */
 }
 
 .message-box h2 {
@@ -261,13 +281,13 @@ body > *:not(#romantic-bg):not(#back-button) {
       overflow: hidden;
       text-align: center;
       border-right: 2px solid rgba(0,0,0,0.6);
-      animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 3;
+      animation: typing 3s steps(22, end) forwards, blink 0.7s step-end 5;
     }
     
     /*ADD1*/
     .section {
-      /*position: absolute;
-      inset: 0;*/
+      position: absolute;
+      inset: 0;
       transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -275,10 +295,18 @@ body > *:not(#romantic-bg):not(#back-button) {
   opacity: 0;
   pointer-events: none;
   transform: translateY(40px);
-  /*position: absolute;
-  width: 100%;*/
 }
-
+    /*
+  opacity: 0;
+  pointer-events: none;        /* disables clicks while hidden 
+  transform: translateY(30px);     /* slightly down for “book” feel */
+    }
+  /*
+  position: absolute;
+  inset: 0;
+}
+  */
+    /*END ADD1*/
 
   #final-section {
   position: fixed;
@@ -407,7 +435,7 @@ body > *:not(#romantic-bg):not(#back-button) {
       <div class="month-card" data-month="february">
         <div class="month-title">February 2026</div>
         <div class="month-caption">Here we are today, after months of knowing and staying with each other.</div>
-    </div>
+      </div>
   </section>
    <!-- GALLERY (EDIT2) -->
 <div id="gallery-container" class="section hidden">
@@ -432,6 +460,13 @@ body > *:not(#romantic-bg):not(#back-button) {
       Words and expressions can't explain how much I'm very thankful to you.
 
       I hope this small website reminds you how much you mean to me.
+    </p>
+
+    <p>
+      Click here:
+      <a href="https://www.spotify.com/nz-en/account/redeem" target="_blank">
+        My last gift!
+      </a>
     </p>
   </div>
 </section> 
@@ -589,11 +624,9 @@ timeline.classList.add("hidden");
 setTimeout(() => {
 
   galleryContainer.classList.remove("hidden");
-  requestAnimationFrame(() => {
+requestAnimationFrame(() => {
   window.scrollTo({ top: 0, behavior: "smooth" });
-  }); 
-  
-}, 400);
+});
 
 // If February, add final button
 if (month === "february") {
@@ -632,10 +665,45 @@ if (month === "february") {
 
   backButton.style.opacity = "1";
   backButton.style.pointerEvents = "auto";
-    
+  
+}, 400);
       });
   });
-  
+  /*  
+  backButton.addEventListener("click", () => {
+  gallery.innerHTML = "";
+  galleryContainer.classList.add("hidden");
+
+  backButton.style.opacity = "0";
+  backButton.style.pointerEvents = "none";
+    
+  timeline.classList.remove("hidden");
+  timeline.scrollIntoView({ behavior: "smooth" });
+});*/
+    
+  /*  backButton.addEventListener("click", () => {
+
+  // If gallery is visible
+  if (!galleryContainer.classList.contains("hidden")) {
+
+    gallery.innerHTML = "";
+    galleryContainer.classList.add("hidden");
+    timeline.classList.remove("hidden");
+
+    return;
+  }
+
+  // If timeline is visible
+  if (!timeline.classList.contains("hidden")) {
+
+    timeline.classList.add("hidden");
+    document.querySelector(".container").classList.remove("hidden");
+
+    backButton.style.opacity = "0";
+    backButton.style.pointerEvents = "none";
+
+  }
+}); */
 
     backButton.addEventListener("click", () => {
 
@@ -653,11 +721,6 @@ if (month === "february") {
     gallery.innerHTML = "";
     galleryContainer.classList.add("hidden");
     timeline.classList.remove("hidden");
-
-    requestAnimationFrame(() => {
-      timeline.scrollIntoView({ behavior: "auto", block: "center" });
-    });
-
     return;
   }
 
