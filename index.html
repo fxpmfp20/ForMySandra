@@ -168,18 +168,6 @@
       opacity: 0.9;
     }
     
-    #romantic-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-body > *:not(#romantic-bg) {
-  position: relative;
-  z-index: 1;
-}
-    
 /*gallery*/
     
     #gallery-container {
@@ -301,6 +289,7 @@ body > *:not(#romantic-bg) {
   pointer-events: none;        /* disables clicks while hidden 
   transform: translateY(30px);     /* slightly down for “book” feel */
     }
+    
   /*
   position: absolute;
   inset: 0;
@@ -308,8 +297,8 @@ body > *:not(#romantic-bg) {
   */
     /*END ADD1*/
 
-  #final-section {
-  position: fixed;
+   #final-section {
+  position: absolute;
   inset: 0;
 
   display: flex;
@@ -325,15 +314,23 @@ body > *:not(#romantic-bg) {
   text-align: center;
 }
 
-.final-content h2 {
-  margin-bottom: 1rem;
+.final-content p {
+  text-align: justify;
+  text-align-last: center;
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+}
+
+.final-content {
+  max-width: 600px;
 }
 
 .final-content p {
   text-align: justify;
   text-align-last: center;
-  line-height: 1.8;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  line-height: 1.7;
 }
 
 .final-content a {
@@ -381,7 +378,6 @@ body > *:not(#romantic-bg) {
   </style>
 </head>
 <body>
-  <canvas id="romantic-bg"></canvas>
   <button id="back-button">←</button>
 
   <!-- HERO edited class container section -->
@@ -579,7 +575,7 @@ body > *:not(#romantic-bg) {
     images: [
       "feb/Screenshot_2026-02-07-14-08-05-415_com.discord.jpg",
       "feb/Screenshot_2026-02-07-14-08-10-024_com.discord.jpg",
-      ]
+      
   },
 };
 
@@ -635,14 +631,10 @@ if (month === "february") {
   finalBtn.textContent = "Read My Final Message";
   finalBtn.style.marginTop = "20px";
 
- finalBtn.onclick = () => {
-  galleryContainer.classList.add("hidden");
-
-  setTimeout(() => {
+  finalBtn.onclick = () => {
+    galleryContainer.classList.add("hidden");
     document.getElementById("final-section").classList.remove("hidden");
-  }, 400);
-};
-
+  };
 
   // append under message box instead of gallery
   const messageBox = document.querySelector(".message-box");
@@ -733,64 +725,7 @@ if (month === "february") {
     backButton.style.pointerEvents = "none";
   }
 
-     
 });
-     /* ===== Romantic Floating Background ===== */
-
-const canvas = document.getElementById("romantic-bg");
-const ctx = canvas.getContext("2d");
-
-let particles = [];
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = canvas.height + Math.random() * 100;
-    this.size = Math.random() * 4 + 2;
-    this.speedY = Math.random() * 0.6 + 0.3;
-    this.opacity = Math.random() * 0.3 + 0.1;
-  }
-
-  update() {
-    this.y -= this.speedY;
-    if (this.y < -10) {
-      this.x = Math.random() * canvas.width;
-      this.y = canvas.height + 20;
-    }
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255, 182, 255, ${this.opacity})`;
-    ctx.fill();
-  }
-}
-
-for (let i = 0; i < 60; i++) {
-  particles.push(new Particle());
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
 
     /*END HANDLER WITH BUTTON*/
   </script>
