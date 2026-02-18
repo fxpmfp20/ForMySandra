@@ -242,13 +242,6 @@
   width: 35%;
   max-height: 70vh;
   overflow-y: auto;
-  /*
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 16px;
-  text-align: left;
-  */
 }
 
 .message-box h2 {
@@ -284,17 +277,6 @@
   pointer-events: none;
   transform: translateY(40px);
 }
-    /*
-  opacity: 0;
-  pointer-events: none;        /* disables clicks while hidden 
-  transform: translateY(30px);     /* slightly down for “book” feel */
-    }
-    
-  /*
-  position: absolute;
-  inset: 0;
-}
-  */
     /*END ADD1*/
 
    #final-section {
@@ -655,42 +637,7 @@ if (month === "february") {
 }, 400);
       });
   });
-  /*  
-  backButton.addEventListener("click", () => {
-  gallery.innerHTML = "";
-  galleryContainer.classList.add("hidden");
-
-  backButton.style.opacity = "0";
-  backButton.style.pointerEvents = "none";
     
-  timeline.classList.remove("hidden");
-  timeline.scrollIntoView({ behavior: "smooth" });
-});*/
-    
-  /*  backButton.addEventListener("click", () => {
-
-  // If gallery is visible
-  if (!galleryContainer.classList.contains("hidden")) {
-
-    gallery.innerHTML = "";
-    galleryContainer.classList.add("hidden");
-    timeline.classList.remove("hidden");
-
-    return;
-  }
-
-  // If timeline is visible
-  if (!timeline.classList.contains("hidden")) {
-
-    timeline.classList.add("hidden");
-    document.querySelector(".container").classList.remove("hidden");
-
-    backButton.style.opacity = "0";
-    backButton.style.pointerEvents = "none";
-
-  }
-}); */
-
     backButton.addEventListener("click", () => {
 
   const finalSection = document.getElementById("final-section");
