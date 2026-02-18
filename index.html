@@ -848,13 +848,13 @@ function createHeart() {
   heart.classList.add("heart");
 
   const size = Math.random() * 20 + 10;
-  heart.style.width = ${size}px;
-  heart.style.height = ${size}px;
+  heart.style.width = `${size}px`;
+  heart.style.height = `${size}px`;
 
   heart.style.left = Math.random() * 100 + "vw";
 
   const duration = Math.random() * 10 + 10;
-  heart.style.animationDuration = ${duration}s, 1.8s;
+  heart.style.animationDuration = `${duration}s, 1.8s`;
 
   heartContainer.appendChild(heart);
 
