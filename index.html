@@ -361,6 +361,8 @@
 </head>
 <body>
   <button id="back-button">←</button>
+  <audio id="bg-music" loop></audio>
+  
 
   <!-- HERO edited class container section -->
   <div class="container section">                               
@@ -445,7 +447,51 @@
   <script>
     /*EDIT2*/
 /*END EDIT2*/
-    
+
+    const music = document.getElementById("bg-music");
+
+const tracks = {
+  greeting: "music/I Miss You.mp3",
+  timeline: "music/I Miss You.mp3",
+  july: "music/Come To Me.mp3",
+  august: "music/It s Raining.mp3",
+  september: "music/A Gloomy Day.mp3",
+  october: "music/Goodbye For Now.mp3",
+  november: "music/Walking In A Snow.mp3",
+  december: "music/I will always be with you [ Love is in small things_ Collection ].mp3",
+  january: "music/I will always be with you [ Love is in small things_ Collection ].mp3",
+  february: "music/I will always be with you [ Love is in small things_ Collection ].mp3"
+};
+    function switchMusic(trackName, volume = 0.4) {
+  if (!tracks[trackName]) return;
+
+  const newSrc = tracks[trackName];
+  if (music.src.includes(newSrc)) return;
+
+  const fadeOut = setInterval(() => {
+    if (music.volume > 0.05) {
+      music.volume -= 0.05;
+    } else {
+      clearInterval(fadeOut);
+
+      music.pause();
+      music.src = newSrc;
+      music.load();
+      music.volume = 0;
+
+      music.play().then(() => {
+        const fadeIn = setInterval(() => {
+          if (music.volume < volume) {
+            music.volume += 0.05;
+          } else {
+            clearInterval(fadeIn);
+          }
+        }, 100);
+      }).catch(() => {});
+    }
+  }, 100);
+}
+
   // your month click and back button code here...
     const memories = {
   july: {
@@ -554,6 +600,7 @@
       
   },
 };
+    
 
     /* ===== DOM REFERENCES ===== */
     const timeline = document.getElementById("timeline");
@@ -563,6 +610,7 @@
 
     /* ===== SHOW TIMELINE ===== */
     function showTimeline() {
+      switchMusic("timeline", 0.45);
      document.querySelector(".container").classList.add("hidden");
   timeline.classList.remove("hidden");
 
@@ -579,6 +627,7 @@
  document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
+    switchMuisc(month, 0.25);
     const data = memories[month];
 if (!data) return;
 
@@ -665,8 +714,11 @@ if (month === "february") {
     backButton.style.opacity = "0";
     backButton.style.pointerEvents = "none";
   }
-
+      window.addEventListener("load", () => {
+  switchMusic("greeting", 0.4);
 });
+
+    
 
     /*END HANDLER WITH BUTTON*/
   </script>
