@@ -341,6 +341,25 @@
   transform: scale(1.1);
 }
 
+.gallery img {
+  transition: transform 0.4s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+#month-message {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.6s ease;
+}
+
+#month-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
    
     @keyframes typing {
@@ -629,6 +648,13 @@ const tracks = {
       
   },
 };
+
+    const messageEl = document.getElementById("month-message");
+messageEl.classList.remove("show");
+
+setTimeout(() => {
+  messageEl.classList.add("show");
+}, 200);
     
 
     /* ===== DOM REFERENCES ===== */
