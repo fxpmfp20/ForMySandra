@@ -627,7 +627,7 @@ const tracks = {
  document.querySelectorAll(".month-card").forEach(card => {
   card.addEventListener("click", () => {
     const month = card.dataset.month;
-    switchMuisc(month, 0.25);
+    switchMusic(month, 0.25);
     const data = memories[month];
 if (!data) return;
 
@@ -714,11 +714,12 @@ if (month === "february") {
     backButton.style.opacity = "0";
     backButton.style.pointerEvents = "none";
   }
-      window.addEventListener("load", () => {
-  switchMusic("greeting", 0.4);
 });
 
-    
+
+  window.addEventListener("load", () => {
+  switchMusic("greeting", 0.4);
+  });
 
     /*END HANDLER WITH BUTTON*/
   </script>
