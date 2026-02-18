@@ -321,6 +321,17 @@
   text-decoration: underline;
 }
 
+.section-transition {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.section-transition.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
    
     @keyframes typing {
       from { width: 0; }
@@ -498,6 +509,7 @@ const tracks = {
     title: "July 2025",
     message: `Our very first moment. Naalala ko pa, nag chat ka sa akin na hinahanap mo ako para sumali sa call sa discord tapos hanggang sa nakakatulog ka na sa call na tayong dalawa lang naiiwan
     HAHAHAHHAHAHAHA I used to take you away to a different channel kapag tulog ka para di ka guluhimn ni Aj hehe. Thank you for giving me a chance, love.`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "july/Screenshot_2025-07-22-21-51-46-507_com.discord.jpg",
       "july/image.jpg"
@@ -508,6 +520,7 @@ const tracks = {
     message: `Shortly after natin mag bonding manood, I went back up here sa Baguio. First week of that (I guess?) nung nag confess ako sayo. I think you were asking me
     that time kung ano ba talaga then I said na gusto kita. You never said anything that time, you just smiled but I think I knew what it means HAHAHA!. Binilhan mo pa ako ng mythic
     dito sa cod and I don't know what to do kasi aawayin mo ako pag di ko tinanggap. Anyways, thank you againnnnnn!`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "augusr/IMG_20250801_202844.jpg",
       "augusr/IMG_20250801_202937.jpg",
@@ -520,6 +533,7 @@ const tracks = {
     title: "September 2025",
     message: `I think this is where we made our intentions clear (ata?) that we would wait for each other. Thank you for that, love. Thank you dahil you chose me kahit nagsisimula
     pa lang ako. I hope na nasa tabi kita hanggang maging successful tayong pareho sa buhay and we can spend our time togtherrrrr!!! <33`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "sept/IMG_20250901_213707.jpg",
       "sept/IMG_20250911_163403.jpg",
@@ -534,6 +548,7 @@ const tracks = {
     title: "October 2025",
     message: `To be honest, October was like flew away with you huhu. I really don't remember anything except from the fact na you're with me when I'm on shit situation. I love you! 
     (side note: inlababo ako sayo dito nung nag dress ka)`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "oct/5f4a8ed9-84b3-4bb1-a3db-10443c2d0c39.jpg",
       "oct/Screenshot_2025-10-23-17-05-31-261_com.discord.jpg",
@@ -544,6 +559,7 @@ const tracks = {
     title: "November 2025",
     message: `This is when we started to play roblox together. Sobrang cute ng moments natin dito kahit nababanas tayo HAHAHAHHAHAAHA. I'm sorry sa mga away natin ditooo puro tayo mura 
     at inis habang naglalaro HAHAHAHHAHA. Stillll, ang cute natin sa mga pictures dito and ang sweet natin kahit may halong kabalstugan`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "nov/Messenger_creation_3A5082AA-8054-4016-95E4-B20CEE5B218B.png",
       "nov/Messenger_creation_45652AE9-DCA4-4BEE-9C2B-22EAAF6DECFF.png",
@@ -564,6 +580,7 @@ const tracks = {
     if you can be my girlfriend and you said "YES". That time, nawala lahat ng pagod ko. I thought you were gonna say no dahil gusto mo pa ako makilala but you said yes. Thank you soooooo
     much! Love, I'm very thankful to God that I ended the year with you and spent the Christmas with you. I have always prayed to God na gabayan nya tayo in our relationship and sana, sanaaa
     tayo na hanggang sa huli. Thank you, love, for making my December wonderful. You're a gift that is more than I have asked for. I'm sorry if wala pa akong maibibigay sayo ngayon. I hope you can bear with me. I love you!`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "dec/Messenger_creation_8BF4A8F5-2BEA-4173-B973-304C89F6C18A.jpeg",
       "dec/Screenshot_2025-12-07-15-53-46-213_com.discord.jpg",
@@ -580,6 +597,7 @@ const tracks = {
     title: "January 2026",
     message: `YEHEYYYY we made it through 2026 together! Happy New Year, lovee! I'm very thankful to God that we made it through the year! Our first monthsary and our first New Year together hehe.
     Thank you for staying with me, we made a lot of things together, accomplished many things together, and many more to come. May this year teach us to love and know each other more deeply. I love yewww!`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "jan/Messenger_creation_AEE33CCE-ABD0-47BB-AC7D-6A16B1B2E695.jpeg",
       "jan/Screenshot_2026-01-22-15-17-53-139_com.discord.jpg",
@@ -593,6 +611,7 @@ const tracks = {
     
     I hope all my effort was enough. Happy Valentines, 2nd Monthsary, and Happy Birthday!!! All in one month! hahahha. Anyways, I just want to thank you for everything, love.
     For staying with me, for everythinggggg. Know that I always pray for you and your family`,
+    background: "linear-gradient(to bottom, #2c3e50, #4ca1af)",
     images: [
       "feb/Screenshot_2026-02-07-14-08-05-415_com.discord.jpg",
       "feb/Screenshot_2026-02-07-14-08-10-024_com.discord.jpg",
@@ -629,6 +648,7 @@ const tracks = {
     const month = card.dataset.month;
     switchMusic(month, 0.25);
     const data = memories[month];
+    document.body.style.background = data.background;
 if (!data) return;
 
     // Remove old February button if it exists
