@@ -268,6 +268,8 @@
     
     /*ADD1*/
     .section {
+      position: absolute;
+      inset: 0;
       transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -453,9 +455,9 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
-#mute-button {
+/*#mute-button {
   position: fixed;
-  top: 90px; /* below back button */
+  top: 90px; 
   right: 20px;
 
   width: 45px;
@@ -477,7 +479,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   z-index: 999;
-}
+} 
 
 #mute-button:hover {
   transform: scale(1.1);
@@ -546,13 +548,12 @@
 <body>
   <div id="heart-container"></div>
   <button id="back-button">←</button>
-  <button id="mute-button">♫</button>
   <audio id="bg-music" loop></audio>
   
 
   <!-- HERO edited class container section -->
   <div class="container section">                               
-    <h1 class="typewriter">Happy Valentines, my love!</h1>
+    <h1 class="typewriter">Happy Birthday, my love!</h1>
     <div class="subtitle">
       I've made this website for your special day. I hope you like it, hehe. I love you!&lt;33
     </div>
@@ -816,9 +817,9 @@ setTimeout(() => {
     const galleryContainer = document.getElementById("gallery-container");
     const gallery = document.getElementById("gallery");
     const backButton = document.getElementById("back-button");
-    const muteButton = document.getElementById("mute-button");
+   /* const muteButton = document.getElementById("mute-button");
     const music = document.getElementById("bg-music");
-    muteButton.addEventListener("click", () => {
+    /*muteButton.addEventListener("click", () => {
   music.muted = !music.muted;
   muteButton.textContent = music.muted ? "♫" : "♬";
 });
