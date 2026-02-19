@@ -434,6 +434,25 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
+  #mute-button {
+  position: fixed;
+  top: 85px; /* slightly below back button */
+  right: 23px; /* align with back button visually */
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1000;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+#mute-button:hover {
+  transform: scale(1.2);
+}
+
 
 /* Floating Animation */
 @keyframes floatUp {
@@ -497,6 +516,7 @@
 <body>
   <div id="heart-container"></div>
   <button id="back-button">←</button>
+  <button id="mute-button">♬</button>
   <audio id="bg-music" loop></audio>
   
 
@@ -912,6 +932,13 @@ function createHeart() {
 }
 
 setInterval(createHeart, 600);
+
+    const muteButton = document.getElementById("mute-button");
+
+muteButton.addEventListener("click", () => {
+  music.muted = !music.muted;
+  muteButton.textContent = music.muted ? "♫" : "♬";
+});
 
     /*END HANDLER WITH BUTTON*/
   </script>
