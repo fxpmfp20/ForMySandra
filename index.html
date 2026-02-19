@@ -340,45 +340,6 @@
   transform: translateY(0);
 }
 
-/* ===== Floating Hearts Background ===== */
-
-#heart-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.heart {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: #ff6a88;
-  transform: rotate(45deg);
-  animation: floatUp linear infinite, heartbeat 1.8s ease-in-out infinite;
-  opacity: 0.7;
-}
-
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: inherit;
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -10px;
-  left: 0;
-}
-
-.heart::after {
-  left: -10px;
-  top: 0;
-}
 
     /* ===== Polaroid Style ===== */
 
@@ -453,28 +414,58 @@
   transform: scale(1.2);
 }
 
+#lantern-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
 
-/* Floating Animation */
-@keyframes floatUp {
+/* Lantern body */
+.lantern {
+  position: absolute;
+  width: 18px;
+  height: 28px;
+  background: radial-gradient(circle at 50% 40%, #ffd27f, #ff9a3c);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: 0 0 20px rgba(255, 180, 80, 0.7);
+  opacity: 0.9;
+  animation: floatLantern linear forwards;
+}
+
+/* small flame glow */
+.lantern::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #fff4c2;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 230, 150, 0.8);
+}
+
+    .lantern:nth-child(odd) {
+  filter: blur(1px);
+  opacity: 0.6;
+}
+    
+    @keyframes floatLantern {
   from {
-    transform: translateY(100vh) rotate(45deg);
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
   }
   to {
-    transform: translateY(-10vh) rotate(45deg);
+    transform: translateY(-20vh) translateX(40px);
+    opacity: 0;
   }
 }
-
-/* Beating Effect */
-@keyframes heartbeat {
-  0%, 100% {
-    scale: 1;
-  }
-  50% {
-    scale: 1.15;
-  }
-}
-
-
    
     @keyframes typing {
       from { width: 0; }
@@ -514,7 +505,7 @@
   </style>
 </head>
 <body>
-  <div id="heart-container"></div>
+  <div id="lantern-container"></div>
   <button id="back-button">←</button>
   <button id="mute-button">♬</button>
   <audio id="bg-music" loop></audio>
@@ -907,31 +898,8 @@ if (month === "february") {
   switchMusic("greeting", 0.4);
   });
 
-
     
-    const heartContainer = document.getElementById("heart-container");
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-
-  const size = Math.random() * 20 + 10;
-  heart.style.width = `${size}px`;
-  heart.style.height = `${size}px`;
-
-  heart.style.left = Math.random() * 100 + "vw";
-
-  const duration = Math.random() * 10 + 10;
-  heart.style.animationDuration = `${duration}s, 1.8s`;
-
-  heartContainer.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, duration * 1000);
-}
-
-setInterval(createHeart, 600);
 
     const muteButton = document.getElementById("mute-button");
 
@@ -939,6 +907,30 @@ muteButton.addEventListener("click", () => {
   music.muted = !music.muted;
   muteButton.textContent = music.muted ? "♫" : "♬";
 });
+    
+    const lanternContainer = document.getElementById("lantern-container");
+
+function createLantern() {
+  const lantern = document.createElement("div");
+  lantern.classList.add("lantern");
+
+  const size = Math.random() * 12 + 12;
+  lantern.style.width = ${size}px;
+  lantern.style.height = ${size * 1.6}px;
+
+  lantern.style.left = Math.random() * 100 + "vw";
+
+  const duration = Math.random() * 10 + 12;
+  lantern.style.animationDuration = ${duration}s;
+
+  lanternContainer.appendChild(lantern);
+
+  setTimeout(() => {
+    lantern.remove();
+  }, duration * 1000);
+}
+
+setInterval(createLantern, 800);
 
     /*END HANDLER WITH BUTTON*/
   </script>
