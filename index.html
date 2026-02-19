@@ -69,19 +69,7 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
-/*
-    #back-button {
-      display: block;
-      margin: 20px auto;
-      background: #ff66cc;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 10;
-      
-    }
-*/
+
     #back-button {
   opacity: 0;
   pointer-events: none;
@@ -176,7 +164,6 @@
   min-height: 100vh;
   padding: 2rem;
   background: transparent;
-  /*removed text-align: center; */
   overflow-x: hidden;
   display: flex;
 }
@@ -188,14 +175,6 @@
       gap: 1rem;
       max-width: 100%;
     }
-
-   /* #gallery img {
-      max-width: 300px;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 12px;
-    } */
 
     .gallery-layout {
   display: flex;
@@ -455,36 +434,6 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
-/*#mute-button {
-  position: fixed;
-  top: 90px; 
-  right: 20px;
-
-  width: 45px;
-  height: 45px;
-
-  background: rgba(255,255,255,0.9);
-  color: #b36bff;
-  border: none;
-  border-radius: 50%;
-
-  font-size: 1rem;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  z-index: 999;
-} 
-
-#mute-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.35);
-}
 
 /* Floating Animation */
 @keyframes floatUp {
@@ -817,13 +766,7 @@ setTimeout(() => {
     const galleryContainer = document.getElementById("gallery-container");
     const gallery = document.getElementById("gallery");
     const backButton = document.getElementById("back-button");
-   /* const muteButton = document.getElementById("mute-button");
-    const music = document.getElementById("bg-music");
-    /*muteButton.addEventListener("click", () => {
-  music.muted = !music.muted;
-  muteButton.textContent = music.muted ? "♫" : "♬";
-});
-    
+   
 
     /* ===== SHOW TIMELINE ===== */
     function showTimeline() {
