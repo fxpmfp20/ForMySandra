@@ -401,6 +401,40 @@
   top: 0;
 }
 
+    /* ===== Polaroid Style ===== */
+
+.polaroid {
+  background: white;
+  padding: 10px 10px 25px 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.polaroid img {
+  display: block;
+  width: 180px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Slight random rotation effect */
+.polaroid:nth-child(odd) {
+  transform: rotate(-3deg);
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(3deg);
+}
+
+/* Hover effect */
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
 /* Floating Animation */
 @keyframes floatUp {
   from {
@@ -790,11 +824,16 @@ if (month === "february") {
 }
   
   data.images.forEach((src, index) => {
+
+    const frame = document.createElement("div");
+    frame.classList.add("polaroid");
+    
     const img = document.createElement("img");
     img.src = src;
     img.style.opacity = 0;
     img.style.transform = "translateY(20px)";
     img.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    frame.appendChild(img);
     gallery.appendChild(img);
 
     setTimeout(() => {
